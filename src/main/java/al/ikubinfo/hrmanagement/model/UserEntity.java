@@ -36,14 +36,8 @@ public class UserEntity {
     @Nullable
     private String password;
 
-    @Column(name = "phone_number")
-    private int phoneNumber;
-
     @Column(name = "birthday")
     private Date birthday;
-
-    @Column(name = "address")
-    private String address;
 
     @Column(name = "gender")
     private String gender;
@@ -51,13 +45,13 @@ public class UserEntity {
     @Column(name = "hire_date")
     private Date hireDate;
 
-    @Column(name = "pto")
+    @Column(name = "paid_time_off")
     private int pto;
 
     @Column(name = "user_status")
     private String userStatus;
 
-    @Column(name = "is_deleted")
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @ManyToOne

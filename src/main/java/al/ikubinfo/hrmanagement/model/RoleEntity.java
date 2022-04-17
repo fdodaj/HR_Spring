@@ -27,7 +27,7 @@ public class RoleEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "is_deleted")
+    @Column(name = "deleted")
     private Boolean deleted = Boolean.FALSE;
 
     @OneToMany(mappedBy = "role")

@@ -22,9 +22,6 @@ public class Request {
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "reason")
     private String reason;
 
@@ -40,13 +37,11 @@ public class Request {
     @Column(name = "date_created")
     private Date dateCreated;
 
-    @Column(name = "is_deleted")
+    @Column(name = "deleted")
     private Boolean Deleted;
 
     @OneToMany(mappedBy = "request")
     private Set<UserEntity> userEntities = new HashSet();
-
-
 
 
 }

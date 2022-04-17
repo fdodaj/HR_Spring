@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS `holiday`(
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     date DATETIME NOT NULL,
-    is_active BOOLEAN NOT NULL,
-    is_deleted BOOLEAN NOT NULL DEFAULT false
+    active BOOLEAN NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT false
 )

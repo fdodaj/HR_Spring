@@ -29,10 +29,7 @@ public class DepartmentEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "department_leader")
-    private String departmentLeader;
-
-    @Column(name = "is_deleted")
+    @Column(name = "deleted")
     private Boolean deleted = Boolean.FALSE;
 
     @ManyToMany

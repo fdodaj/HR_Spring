@@ -15,7 +15,6 @@ public class DepartmentConverter implements BidirectionalConverter<DepartmentDto
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
-        dto.setDepartmentLeader(entity.getDepartmentLeader());
         dto.setDeleted(entity.getDeleted());
 
         return dto;
@@ -28,7 +27,6 @@ public class DepartmentConverter implements BidirectionalConverter<DepartmentDto
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
-        entity.setDepartmentLeader(dto.getDepartmentLeader());
         entity.setDeleted(dto.getDeleted());
 
         return entity;

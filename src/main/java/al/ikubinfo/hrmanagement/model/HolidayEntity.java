@@ -30,10 +30,10 @@ public class HolidayEntity {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "is_active")
+    @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "is_deleted")
+    @Column(name = "deleted")
     private Boolean deleted =Boolean.FALSE;
 
 }
