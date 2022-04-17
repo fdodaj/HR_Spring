@@ -1,6 +1,12 @@
 spring:
+  jpa:
+    properties:
+      dialect: org.hibernate.dialect.H2Dialect
   flyway:
-    enabled: false
+    locations:
+     - classpath:/db/migration
+    baseline-on-migrate: true
+    table: SCHEMA_HISTORY
 
   h2:
     console:
@@ -12,7 +18,3 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: create
