@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `roleEntity`(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    date_created DATETIME NOT NULL,
+    is_deleted BOOLEAN DEFAULT FALSE
+)
