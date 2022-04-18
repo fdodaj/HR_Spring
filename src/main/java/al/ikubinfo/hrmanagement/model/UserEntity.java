@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted=0")
 @Table(name = "user")
 @Getter
 @Setter
@@ -33,7 +33,6 @@ public class UserEntity {
     private String email;
 
     @Column(name = "password")
-    @Nullable
     private String password;
 
     @Column(name = "birthday")
@@ -46,10 +45,7 @@ public class UserEntity {
     private Date hireDate;
 
     @Column(name = "paid_time_off")
-    private int pto;
-
-    @Column(name = "user_status")
-    private String userStatus;
+    private int paidTimeOff;
 
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
@@ -58,12 +54,12 @@ public class UserEntity {
     @JoinColumn(name = "role")
     private RoleEntity role;
 
-    @ManyToOne
-    @JoinColumn(name = "request", nullable = true)
-    private Request request;
+//    @OneToMany
+//    private Set<Request> requests;
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
+
 
 }
 

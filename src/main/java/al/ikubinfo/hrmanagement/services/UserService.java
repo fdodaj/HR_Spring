@@ -4,18 +4,26 @@ import al.ikubinfo.hrmanagement.converters.UserConverter;
 import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.model.RoleEntity;
 import al.ikubinfo.hrmanagement.model.UserEntity;
+import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private UserConverter userConverter;
@@ -46,5 +54,21 @@ public class UserService {
         userRepository.save(userEntity);
         return userDto;
     }
+
+    RoleEntity addRole(RoleEntity role){
+        return roleRepository.save(role);
+    }
+
+    void addRoleToUser(String email, String roleName){
+        UserEntity userEntity = userRepository.findByEmail(email);
+        RoleEntity roleEntity = roleRepository.findByName(roleName);
+        roleEntity.getUserEntities().add(userEntity);
+    }
+
+    UserEntity getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+
 
 }

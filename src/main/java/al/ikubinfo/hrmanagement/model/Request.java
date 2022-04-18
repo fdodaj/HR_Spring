@@ -40,8 +40,9 @@ public class Request {
     @Column(name = "deleted")
     private Boolean Deleted;
 
-    @OneToMany(mappedBy = "request")
-    private Set<UserEntity> userEntities = new HashSet();
+//    @ManyToOne
+//    @JoinColumn(name = "id", nullable = false)
+//    private UserEntity userEntity;
 
 
 }
