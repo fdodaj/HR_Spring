@@ -1,7 +1,7 @@
 package al.ikubinfo.hrmanagement.converters;
 
 import al.ikubinfo.hrmanagement.dto.DepartmentDto;
-import al.ikubinfo.hrmanagement.model.DepartmentEntity;
+import al.ikubinfo.hrmanagement.entity.DepartmentEntity;
 import org.springframework.stereotype.Component;
 
 @Component

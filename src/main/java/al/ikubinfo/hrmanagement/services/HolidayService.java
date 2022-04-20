@@ -3,7 +3,7 @@ package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.HolidayConverter;
 import al.ikubinfo.hrmanagement.dto.HolidayDto;
-import al.ikubinfo.hrmanagement.model.HolidayEntity;
+import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import al.ikubinfo.hrmanagement.repository.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
 package al.ikubinfo.hrmanagement.converters;
 
 import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.model.UserEntity;
-import org.apache.catalina.User;
+import al.ikubinfo.hrmanagement.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 
@@ -22,7 +21,6 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         dto.setGender(entity.getGender());
         dto.setHireDate(entity.getHireDate());
         dto.setPto(entity.getPto());
-        dto.setUserStatus(entity.getUserStatus());
         return dto;
     }
 
@@ -40,7 +38,6 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         entity.setGender(dto.getGender());
         entity.setHireDate(dto.getHireDate());
         entity.setPto(dto.getPto());
-        entity.setUserStatus(dto.getUserStatus());
         return entity;
     }
 }

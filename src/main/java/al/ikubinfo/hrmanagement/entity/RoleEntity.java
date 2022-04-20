@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.model;
+package al.ikubinfo.hrmanagement.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,10 +6,11 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted=0")
 @Table(name = "role")
 @Getter
 @Setter
@@ -32,5 +33,4 @@ public class RoleEntity {
 
     @OneToMany(mappedBy = "role")
     private List<UserEntity> userEntities = new ArrayList<>();
-
 }

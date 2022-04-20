@@ -1,15 +1,12 @@
 package al.ikubinfo.hrmanagement.services;
 
-import al.ikubinfo.hrmanagement.controller.RoleController;
 import al.ikubinfo.hrmanagement.converters.RoleConverter;
 import al.ikubinfo.hrmanagement.dto.RoleDto;
-import al.ikubinfo.hrmanagement.model.RoleEntity;
+import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

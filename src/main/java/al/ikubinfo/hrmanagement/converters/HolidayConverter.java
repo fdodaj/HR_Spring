@@ -2,7 +2,7 @@ package al.ikubinfo.hrmanagement.converters;
 
 
 import al.ikubinfo.hrmanagement.dto.HolidayDto;
-import al.ikubinfo.hrmanagement.model.HolidayEntity;
+import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import org.springframework.stereotype.Component;
 
 @Component

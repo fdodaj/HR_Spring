@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.model;
+package al.ikubinfo.hrmanagement.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,16 +6,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 
 @Entity
-@Table(name = "request ")
+@Table(name = "request")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Request {
+public class RequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,8 +39,9 @@ public class Request {
     @Column(name = "deleted")
     private Boolean Deleted;
 
-    @OneToMany(mappedBy = "request")
-    private Set<UserEntity> userEntities = new HashSet();
+    @ManyToOne
+    @JoinColumn(name = "request")
+    private UserEntity user;
 
 
 }

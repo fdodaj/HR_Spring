@@ -1,6 +1,7 @@
 package al.ikubinfo.hrmanagement.dto;
 
 
+import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,9 +34,9 @@ public class UserDto {
 
     private  String userStatus;
 
-//    private RoleEntity role;
+    private RoleEntity role;
 //
-//    private Request request;
+//    private RequestEntity request;
 //
 //    private Set<Department> department;
 }
