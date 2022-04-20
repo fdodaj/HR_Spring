@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS `request`(
     to_date DATETIME NOT NULL,
     business_days INT NOT NULL,
     request_status VARCHAR(255) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT false,
-    user_id INT NOT NULL
+    date_created VARCHAR(255) NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT false
 )

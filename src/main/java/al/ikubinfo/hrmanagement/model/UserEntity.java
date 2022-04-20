@@ -7,9 +7,7 @@ import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Where(clause = "deleted=0")
@@ -54,11 +52,11 @@ public class UserEntity {
     @JoinColumn(name = "role")
     private RoleEntity role;
 
-//    @OneToMany
-//    private Set<RequestEntity> requests;
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
+
+
 
 
 }

@@ -14,6 +14,7 @@ public class RequestDto {
     private Date fromDate;
     private Date toDate;
     private Integer businessDays;
+    private String requestStatus;
     private Date dateCreated;
     private boolean deleted;
 
