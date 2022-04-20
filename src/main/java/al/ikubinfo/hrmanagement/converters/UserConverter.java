@@ -23,7 +23,8 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         dto.setHireDate(entity.getHireDate());
         dto.setPaidTimeOff(entity.getPaidTimeOff());
         dto.setDeleted(entity.isDeleted());
-        return dto;
+        dto.setRole(entity.getRole().getId());
+        return dto;\
     }
 
 
@@ -41,6 +42,7 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         entity.setHireDate(dto.getHireDate());
         entity.setPaidTimeOff(dto.getPaidTimeOff());
         entity.setDeleted(dto.isDeleted());
+        entity.setRole(entity.getRole());
         return entity;
     }
 }

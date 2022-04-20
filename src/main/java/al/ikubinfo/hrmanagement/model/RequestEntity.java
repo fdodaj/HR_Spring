@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Request {
+public class RequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

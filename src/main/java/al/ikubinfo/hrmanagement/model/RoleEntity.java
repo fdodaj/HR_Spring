@@ -31,6 +31,6 @@ public class RoleEntity {
     private Boolean deleted = Boolean.FALSE;
 
     @OneToMany(mappedBy = "role")
-    private List<UserEntity> userEntities = new ArrayList<>();
+    private List<UserEntity> users = new ArrayList<>();
 
 }

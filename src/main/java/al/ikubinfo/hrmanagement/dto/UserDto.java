@@ -1,15 +1,10 @@
 package al.ikubinfo.hrmanagement.dto;
 
 
-import al.ikubinfo.hrmanagement.model.DepartmentEntity;
-import al.ikubinfo.hrmanagement.model.Request;
-import al.ikubinfo.hrmanagement.model.RoleEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -34,10 +29,12 @@ public class UserDto {
 
     private boolean deleted;
 //
-//    private RoleEntity role;
+    private Long  role;
+
+    }
 //
-//    private Request request;
-//    private Set<Request> requests = new HashSet<>();
+//    private RequestEntity request;
+//    private Set<RequestEntity> requests = new HashSet<>();
 //
 //    private Set<DepartmentEntity> departmentEntity = new HashSet<>();
-}
+

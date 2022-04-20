@@ -55,15 +55,11 @@ public class UserService {
         return userDto;
     }
 
-    RoleEntity addRole(RoleEntity role){
-        return roleRepository.save(role);
-    }
-
-    void addRoleToUser(String email, String roleName){
-        UserEntity userEntity = userRepository.findByEmail(email);
-        RoleEntity roleEntity = roleRepository.findByName(roleName);
-        roleEntity.getUserEntities().add(userEntity);
-    }
+//    public void addRoleToUser(String email, String roleName){
+//        UserEntity userEntity = userRepository.findByEmail(email);
+//        RoleEntity roleEntity = roleRepository.findByName(roleName);
+//        roleEntity.getUserEntities().add(userEntity);
+//    }
 
     UserEntity getUserByEmail(String email){
         return userRepository.findByEmail(email);

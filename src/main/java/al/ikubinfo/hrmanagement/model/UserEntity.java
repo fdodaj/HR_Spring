@@ -55,7 +55,7 @@ public class UserEntity {
     private RoleEntity role;
 
 //    @OneToMany
-//    private Set<Request> requests;
+//    private Set<RequestEntity> requests;
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
