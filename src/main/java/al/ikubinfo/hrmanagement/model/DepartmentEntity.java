@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted=0")
 @Table(name = "department")
 @Getter
 @Setter

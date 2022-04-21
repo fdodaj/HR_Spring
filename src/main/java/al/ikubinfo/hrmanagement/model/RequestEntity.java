@@ -11,16 +11,16 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "request ")
+@Table(name = "request")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Request {
+public class RequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "reason")
     private String reason;
@@ -34,14 +34,15 @@ public class Request {
     @Column(name = "business_days")
     private Integer businessDays;
 
+    @Column(name = "request_status")
+    private String requestStatus;
+
     @Column(name = "date_created")
     private Date dateCreated;
 
     @Column(name = "deleted")
     private Boolean Deleted;
 
-    @OneToMany(mappedBy = "request")
-    private Set<UserEntity> userEntities = new HashSet();
 
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted=0")
 @Table(name = "holiday")
 @Getter
 @Setter

@@ -7,12 +7,10 @@ import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted = 0")
 @Table(name = "user")
 @Getter
 @Setter
@@ -33,7 +31,6 @@ public class UserEntity {
     private String email;
 
     @Column(name = "password")
-    @Nullable
     private String password;
 
     @Column(name = "birthday")
@@ -46,10 +43,7 @@ public class UserEntity {
     private Date hireDate;
 
     @Column(name = "paid_time_off")
-    private int pto;
-
-    @Column(name = "user_status")
-    private String userStatus;
+    private int paidTimeOff;
 
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
@@ -58,12 +52,12 @@ public class UserEntity {
     @JoinColumn(name = "role")
     private RoleEntity role;
 
-    @ManyToOne
-    @JoinColumn(name = "request", nullable = true)
-    private Request request;
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
+
+
+
 
 }
 

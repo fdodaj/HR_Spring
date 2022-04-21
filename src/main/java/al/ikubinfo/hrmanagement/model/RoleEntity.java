@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Where(clause = "is_deleted=0")
+@Where(clause = "deleted=0")
 @Table(name = "role")
 @Getter
 @Setter
@@ -31,6 +31,6 @@ public class RoleEntity {
     private Boolean deleted = Boolean.FALSE;
 
     @OneToMany(mappedBy = "role")
-    private List<UserEntity> userEntities = new ArrayList<>();
+    private List<UserEntity> users = new ArrayList<>();
 
 }
