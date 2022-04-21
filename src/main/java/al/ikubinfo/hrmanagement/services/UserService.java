@@ -49,17 +49,22 @@ public class UserService {
         return true;
     }
 
+    public UserDto getUserById(Long id){
+        UserEntity user = userRepository.getById(id);
+        return userConverter.toDto(user);
+    }
+
     public UserDto updateUser (UserDto userDto){
         UserEntity userEntity = userConverter.toEntity(userDto);
         userRepository.save(userEntity);
         return userDto;
     }
 
-//    public void addRoleToUser(String email, String roleName){
-//        UserEntity userEntity = userRepository.findByEmail(email);
-//        RoleEntity roleEntity = roleRepository.findByName(roleName);
-//        roleEntity.getUserEntities().add(userEntity);
-//    }
+    public void addRoleToUser(String email, String roleName){
+        UserEntity userEntity = userRepository.findByEmail(email);
+        RoleEntity roleEntity = roleRepository.findByName(roleName);
+        userEntity.setRole(roleEntity);
+    }
 
     UserEntity getUserByEmail(String email){
         return userRepository.findByEmail(email);

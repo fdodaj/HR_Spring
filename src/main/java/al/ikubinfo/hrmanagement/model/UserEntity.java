@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Where(clause = "deleted=0")
+@Where(clause = "deleted = 0")
 @Table(name = "user")
 @Getter
 @Setter
