@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.model;
+package al.ikubinfo.hrmanagement.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -42,7 +40,6 @@ public class RequestEntity {
 
     @Column(name = "deleted")
     private Boolean Deleted;
-
 
 
 }

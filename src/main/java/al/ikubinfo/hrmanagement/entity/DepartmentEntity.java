@@ -36,5 +36,4 @@ public class DepartmentEntity {
     private Set<UserEntity> userEntityDepartment = new HashSet<>();
 
 
-
 }

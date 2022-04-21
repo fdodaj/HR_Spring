@@ -19,7 +19,7 @@ public class RoleService {
     @Autowired
     private RoleConverter roleConverter;
 
-    public List<RoleDto> getRole(){
+    public List<RoleDto> getRole() {
 
 
         return roleRepository
@@ -30,13 +30,13 @@ public class RoleService {
     }
 
 
-    public RoleDto addRole(RoleDto roleDto){
-            RoleEntity roleEntity = roleConverter.toEntity(roleDto);
-            roleRepository.save(roleEntity);
-            return roleDto;
+    public RoleDto addRole(RoleDto roleDto) {
+        RoleEntity roleEntity = roleConverter.toEntity(roleDto);
+        roleRepository.save(roleEntity);
+        return roleDto;
     }
 
-    public boolean deleteRole(Long id){
+    public boolean deleteRole(Long id) {
         RoleEntity roleEntity = roleRepository.getById(id);
         roleEntity.setDeleted(true);
         roleRepository.save(roleEntity);

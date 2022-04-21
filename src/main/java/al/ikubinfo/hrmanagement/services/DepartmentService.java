@@ -18,7 +18,7 @@ public class DepartmentService {
     @Autowired
     private DepartmentConverter departmentConverter;
 
-    public List<DepartmentDto> getDepartment(){
+    public List<DepartmentDto> getDepartment() {
         return departmentRepository
                 .findAll()
                 .stream()
@@ -26,20 +26,20 @@ public class DepartmentService {
                 .collect(Collectors.toList());
     }
 
-    public DepartmentDto addDepartment(DepartmentDto departmentDto){
+    public DepartmentDto addDepartment(DepartmentDto departmentDto) {
         DepartmentEntity departmentEntity = departmentConverter.toEntity(departmentDto);
         departmentRepository.save(departmentEntity);
         return departmentDto;
     }
 
-    public boolean deleteDepartment(Long id){
+    public boolean deleteDepartment(Long id) {
         DepartmentEntity departmentEntity = departmentRepository.getById(id);
         departmentEntity.setDeleted(true);
         departmentRepository.save(departmentEntity);
         return false;
     }
 
-    public DepartmentDto updateDepartment(DepartmentDto departmentDto){
+    public DepartmentDto updateDepartment(DepartmentDto departmentDto) {
         DepartmentEntity departmentEntity = departmentConverter.toEntity(departmentDto);
         departmentRepository.save(departmentEntity);
         return departmentDto;

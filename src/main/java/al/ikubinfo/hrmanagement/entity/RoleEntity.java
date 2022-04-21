@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.model;
+package al.ikubinfo.hrmanagement.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Where(clause = "deleted=0")

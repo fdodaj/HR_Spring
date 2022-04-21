@@ -20,7 +20,7 @@ public class HolidayService {
     @Autowired
     private HolidayConverter holidayConverter;
 
-    public List<HolidayDto> getHoliday(){
+    public List<HolidayDto> getHoliday() {
         return holidayRepository
                 .findAll()
                 .stream()
@@ -28,13 +28,13 @@ public class HolidayService {
                 .collect(Collectors.toList());
     }
 
-    public HolidayDto addHoliday(HolidayDto holidayDto){
+    public HolidayDto addHoliday(HolidayDto holidayDto) {
         HolidayEntity holidayEntity = holidayConverter.toEntity(holidayDto);
         holidayRepository.save(holidayEntity);
         return holidayDto;
     }
 
-    public boolean deleteHoliday(Long id){
+    public boolean deleteHoliday(Long id) {
         HolidayEntity holidayEntity = holidayRepository.getById(id);
         holidayEntity.setDeleted(true);
         holidayRepository.save(holidayEntity);

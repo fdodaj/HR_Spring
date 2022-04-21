@@ -5,7 +5,7 @@ import al.ikubinfo.hrmanagement.entity.DepartmentEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DepartmentConverter implements BidirectionalConverter<DepartmentDto, DepartmentEntity>{
+public class DepartmentConverter implements BidirectionalConverter<DepartmentDto, DepartmentEntity> {
 
 
     @Override

@@ -34,6 +34,6 @@ public class HolidayEntity {
     private Boolean active;
 
     @Column(name = "deleted")
-    private Boolean deleted =Boolean.FALSE;
+    private Boolean deleted = Boolean.FALSE;
 
 }

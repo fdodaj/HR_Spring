@@ -1,17 +1,14 @@
 package al.ikubinfo.hrmanagement.converters;
 
 import al.ikubinfo.hrmanagement.dto.RequestDto;
-import al.ikubinfo.hrmanagement.model.RequestEntity;
+import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import java.util.Date;
-
 @Component
-public class RequestConverter implements BidirectionalConverter<RequestDto, RequestEntity>{
+public class RequestConverter implements BidirectionalConverter<RequestDto, RequestEntity> {
 
     @Override
-    public RequestDto toDto(RequestEntity entity){
+    public RequestDto toDto(RequestEntity entity) {
         RequestDto dto = new RequestDto();
 
         dto.setId(entity.getId());

@@ -26,30 +26,30 @@ public class RoleController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RoleDto> addRole(@RequestBody RoleDto roleDto){
+    public ResponseEntity<RoleDto> addRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.addRole(roleDto));
     }
 
     @DeleteMapping(path = "{id}")
-     public ResponseEntity<RoleDto> deleteRole(@PathVariable("id") Long id){
+    public ResponseEntity<RoleDto> deleteRole(@PathVariable("id") Long id) {
         roleService.deleteRole(id);
         return new ResponseEntity("Role deleted", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<RoleDto> updateRole(@RequestBody RoleDto roleDto){
+    public ResponseEntity<RoleDto> updateRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.updateRole(roleDto));
     }
 
     @PostMapping("/addToUser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleRoUserForm form){
+    public ResponseEntity<?> addRoleToUser(@RequestBody RoleRoUserForm form) {
         userService.addRoleToUser(form.getEmail(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 }
 
 @Data
-class RoleRoUserForm{
+class RoleRoUserForm {
     private String email;
     private String roleName;
 }

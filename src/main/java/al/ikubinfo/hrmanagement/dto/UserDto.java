@@ -28,10 +28,10 @@ public class UserDto {
     private int paidTimeOff;
 
     private boolean deleted;
-//
-    private Long  role;
+    //
+    private Long role;
 
-    }
+}
 //
 //    private RequestEntity request;
 //    private Set<RequestEntity> requests = new HashSet<>();

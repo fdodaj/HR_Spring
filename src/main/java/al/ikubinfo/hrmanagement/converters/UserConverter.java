@@ -1,8 +1,7 @@
 package al.ikubinfo.hrmanagement.converters;
 
 import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.model.UserEntity;
-import org.apache.catalina.User;
+import al.ikubinfo.hrmanagement.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 

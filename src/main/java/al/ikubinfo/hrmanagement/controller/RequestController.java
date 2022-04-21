@@ -19,23 +19,23 @@ public class RequestController {
     private RequestService requestService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<RequestDto>> getRequests(){
+    public ResponseEntity<List<RequestDto>> getRequests() {
         return new ResponseEntity<>(requestService.getRequests(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto){
+    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) {
         return ResponseEntity.ok(requestService.createRequest(requestDto));
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<RequestDto> deleteRequest(@PathVariable("id") Long id){
+    public ResponseEntity<RequestDto> deleteRequest(@PathVariable("id") Long id) {
         requestService.deleteRequest(id);
         return new ResponseEntity("Request Deleted", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<RequestDto> updateRequest(@RequestBody RequestDto requestDto){
+    public ResponseEntity<RequestDto> updateRequest(@RequestBody RequestDto requestDto) {
         return ResponseEntity.ok(requestService.updateRequest(requestDto));
     }
- }
+}

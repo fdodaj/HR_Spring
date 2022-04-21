@@ -5,7 +5,7 @@ import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoleConverter implements BidirectionalConverter<RoleDto, RoleEntity>{
+public class RoleConverter implements BidirectionalConverter<RoleDto, RoleEntity> {
 
     @Override
     public RoleDto toDto(RoleEntity entity) {

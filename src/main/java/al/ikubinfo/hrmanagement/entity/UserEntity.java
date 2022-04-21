@@ -1,13 +1,14 @@
-package al.ikubinfo.hrmanagement.model;
+package al.ikubinfo.hrmanagement.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Where(clause = "deleted = 0")
@@ -55,8 +56,6 @@ public class UserEntity {
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
-
-
 
 
 }
