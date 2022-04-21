@@ -16,4 +16,6 @@ public class RoleDto {
 
     private Boolean deleted;
 
+
+
 }

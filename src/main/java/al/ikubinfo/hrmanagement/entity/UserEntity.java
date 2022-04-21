@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.entity;
+package al.ikubinfo.hrmanagement.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,13 +7,10 @@ import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Where(clause = "deleted=0")
+@Where(clause = "deleted = 0")
 @Table(name = "user")
 @Getter
 @Setter
@@ -34,7 +31,6 @@ public class UserEntity {
     private String email;
 
     @Column(name = "password")
-    @Nullable
     private String password;
 
     @Column(name = "birthday")
@@ -47,7 +43,7 @@ public class UserEntity {
     private Date hireDate;
 
     @Column(name = "paid_time_off")
-    private int pto;
+    private int paidTimeOff;
 
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
@@ -56,12 +52,12 @@ public class UserEntity {
     @JoinColumn(name = "role")
     private RoleEntity role;
 
-    @OneToMany
-    @JoinColumn(name = "request")
-    private List<RequestEntity> requests;
 
     @ManyToMany(mappedBy = "userEntityDepartment")
     private Set<DepartmentEntity> departmentEntity = new HashSet<>();
+
+
+
 
 }
 

@@ -2,17 +2,23 @@ package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.UserConverter;
 import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.entity.RoleEntity;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
+import al.ikubinfo.hrmanagement.model.RoleEntity;
+import al.ikubinfo.hrmanagement.model.UserEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -43,7 +49,10 @@ public class UserService {
         return true;
     }
 
-
+    public UserDto getUserById(Long id){
+        UserEntity user = userRepository.getById(id);
+        return userConverter.toDto(user);
+    }
 
     public UserDto updateUser (UserDto userDto){
         UserEntity userEntity = userConverter.toEntity(userDto);
@@ -51,10 +60,16 @@ public class UserService {
         return userDto;
     }
 
-    void addUserToRole(String email, String roleName){
-        RoleEntity role = roleRepository.findByName(roleName);
-        UserEntity user = userRepository.findByEmail(email);
-        user.setRole(role);
+    public void addRoleToUser(String email, String roleName){
+        UserEntity userEntity = userRepository.findByEmail(email);
+        RoleEntity roleEntity = roleRepository.findByName(roleName);
+        userEntity.setRole(roleEntity);
     }
+
+    UserEntity getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+
 
 }

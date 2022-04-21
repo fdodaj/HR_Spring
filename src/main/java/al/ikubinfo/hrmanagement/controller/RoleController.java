@@ -3,6 +3,8 @@ package al.ikubinfo.hrmanagement.controller;
 
 import al.ikubinfo.hrmanagement.dto.RoleDto;
 import al.ikubinfo.hrmanagement.services.RoleService;
+import al.ikubinfo.hrmanagement.services.UserService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+    private UserService userService;
 
     @GetMapping("/all")
     public ResponseEntity<List<RoleDto>> getRoles() {
@@ -37,5 +40,17 @@ public class RoleController {
     public ResponseEntity<RoleDto> updateRole(@RequestBody RoleDto roleDto){
         return ResponseEntity.ok(roleService.updateRole(roleDto));
     }
+
+    @PostMapping("/addToUser")
+    public ResponseEntity<?> addRoleToUser(@RequestBody RoleRoUserForm form){
+        userService.addRoleToUser(form.getEmail(), form.getRoleName());
+        return ResponseEntity.ok().build();
+    }
+}
+
+@Data
+class RoleRoUserForm{
+    private String email;
+    private String roleName;
 }
 

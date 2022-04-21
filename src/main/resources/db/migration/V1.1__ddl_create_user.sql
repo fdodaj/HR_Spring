@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS `user` (
     paid_time_off  INTEGER,
     deleted BOOLEAN DEFAULT false,
     role INT NOT NULL,
-    department INT NOT NULL
+    department int NOT NULL
     );

@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.entity;
+package al.ikubinfo.hrmanagement.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Where(clause = "deleted=0")
@@ -32,5 +31,6 @@ public class RoleEntity {
     private Boolean deleted = Boolean.FALSE;
 
     @OneToMany(mappedBy = "role")
-    private List<UserEntity> userEntities = new ArrayList<>();
+    private List<UserEntity> users = new ArrayList<>();
+
 }

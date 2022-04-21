@@ -1,7 +1,10 @@
 package al.ikubinfo.hrmanagement.controller;
 
+import al.ikubinfo.hrmanagement.dto.RoleDto;
 import al.ikubinfo.hrmanagement.dto.UserDto;
+import al.ikubinfo.hrmanagement.model.UserEntity;
 import al.ikubinfo.hrmanagement.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(path = "/user")
 public class UserController {
 
@@ -18,7 +22,9 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<List<UserDto>> getUsers(){
-        return ResponseEntity.ok(userService.getUsers());
+//        return ResponseEntity.ok(userService.getUsers());
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+
     }
 
     @PostMapping("/add")
@@ -36,4 +42,17 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
         return ResponseEntity.ok(userService.updateUser(userDto));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long id){
+        return new ResponseEntity(userService.getUserById(id), HttpStatus.OK);
+    }
+
+
+//    @PutMapping(path = "/addRole")
+//    public ResponseEntity<UserDto> addRole(@RequestBody UserDto userDto, RoleDto roleDto){
+//
+//    }
+
+
 }

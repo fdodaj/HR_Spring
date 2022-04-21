@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.entity;
+package al.ikubinfo.hrmanagement.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -19,7 +20,7 @@ public class RequestEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "reason")
     private String reason;
@@ -33,15 +34,15 @@ public class RequestEntity {
     @Column(name = "business_days")
     private Integer businessDays;
 
+    @Column(name = "request_status")
+    private String requestStatus;
+
     @Column(name = "date_created")
     private Date dateCreated;
 
     @Column(name = "deleted")
     private Boolean Deleted;
 
-    @ManyToOne
-    @JoinColumn(name = "request")
-    private UserEntity user;
 
 
 }
