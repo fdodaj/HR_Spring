@@ -46,12 +46,4 @@ public class UserController {
     public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long id) {
         return new ResponseEntity(userService.getUserById(id), HttpStatus.OK);
     }
-
-
-//    @PutMapping(path = "/addRole")
-//    public ResponseEntity<UserDto> addRole(@RequestBody UserDto userDto, RoleDto roleDto){
-//
-//    }
-
-
 }

@@ -1,14 +1,16 @@
 package al.ikubinfo.hrmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Where(clause = "deleted = 0")
@@ -16,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,14 +53,9 @@ public class UserEntity {
     private boolean deleted = Boolean.FALSE;
 
     @ManyToOne
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "user_role")
+    @JsonIgnore
     private RoleEntity role;
-
-
-    @ManyToMany(mappedBy = "userEntityDepartment")
-    private Set<DepartmentEntity> departmentEntity = new HashSet<>();
-
-
 }
 
 

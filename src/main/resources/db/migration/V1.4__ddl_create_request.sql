@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS `request`(
     business_days INT NOT NULL,
     request_status VARCHAR(255) NOT NULL,
     date_created VARCHAR(255) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT false
+    deleted BOOLEAN NOT NULL DEFAULT false,
+    user INT not null
 )

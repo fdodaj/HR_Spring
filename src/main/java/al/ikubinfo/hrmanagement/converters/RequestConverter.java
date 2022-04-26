@@ -28,11 +28,12 @@ public class RequestConverter implements BidirectionalConverter<RequestDto, Requ
         entity.setId(dto.getId());
         entity.setReason(dto.getReason());
         entity.setFromDate(dto.getFromDate());
+        entity.setToDate(dto.getToDate());
         entity.setBusinessDays(dto.getBusinessDays());
         entity.setDateCreated(dto.getDateCreated());
         entity.setDeleted(dto.isDeleted());
-        entity.setToDate(entity.getToDate());
-        entity.setRequestStatus(entity.getRequestStatus());
+        entity.setToDate(dto.getToDate());
+        entity.setRequestStatus(dto.getRequestStatus());
         return entity;
     }
 }

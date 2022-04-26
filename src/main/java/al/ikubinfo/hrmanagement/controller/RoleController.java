@@ -40,17 +40,6 @@ public class RoleController {
     public ResponseEntity<RoleDto> updateRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.updateRole(roleDto));
     }
-
-    @PostMapping("/addToUser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleRoUserForm form) {
-        userService.addRoleToUser(form.getEmail(), form.getRoleName());
-        return ResponseEntity.ok().build();
-    }
 }
 
-@Data
-class RoleRoUserForm {
-    private String email;
-    private String roleName;
-}
 

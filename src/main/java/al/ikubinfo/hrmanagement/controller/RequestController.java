@@ -29,9 +29,8 @@ public class RequestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<RequestDto> deleteRequest(@PathVariable("id") Long id) {
-        requestService.deleteRequest(id);
-        return new ResponseEntity("Request Deleted", HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteRequest(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(requestService.deleteRequest(id));
     }
 
     @PutMapping(path = "/{id}")

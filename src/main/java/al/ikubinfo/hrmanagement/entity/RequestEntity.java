@@ -1,22 +1,26 @@
 package al.ikubinfo.hrmanagement.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
+@Where(clause = "deleted = 0")
 @Table(name = "request")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RequestEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id;
 
@@ -41,5 +45,8 @@ public class RequestEntity {
     @Column(name = "deleted")
     private Boolean Deleted;
 
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private UserEntity user;
 
 }

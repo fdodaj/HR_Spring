@@ -60,15 +60,4 @@ public class UserService {
         return userDto;
     }
 
-    public void addRoleToUser(String email, String roleName) {
-        UserEntity userEntity = userRepository.findByEmail(email);
-        RoleEntity roleEntity = roleRepository.findByName(roleName);
-        userEntity.setRole(roleEntity);
-    }
-
-    UserEntity getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-
 }

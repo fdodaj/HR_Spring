@@ -13,8 +13,8 @@ spring:
       path: /h2
       enabled: true
   datasource:
-#    url: jdbc:h2:mem:mydb
-    url: jdbc:h2:file:~/hr;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    url: jdbc:h2:mem:mydb
+#    url: jdbc:h2:file:~/test;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
