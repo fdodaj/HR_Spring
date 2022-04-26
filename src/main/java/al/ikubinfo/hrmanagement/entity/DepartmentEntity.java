@@ -35,4 +35,7 @@ public class DepartmentEntity {
     @Column(name = "deleted")
     private Boolean deleted = Boolean.FALSE;
 
+    @OneToMany(mappedBy = "department")
+    private List<UserEntity> users = new ArrayList<>();
+
 }

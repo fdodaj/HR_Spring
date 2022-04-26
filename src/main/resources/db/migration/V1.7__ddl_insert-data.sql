@@ -8,10 +8,10 @@ INSERT INTO department(id, name, description,department_leader, deleted)values (
 INSERT INTO department(id, name, description,department_leader, deleted)values (3, 'c++', 'c++', 3 ,false);
 INSERT INTO department(id, name, description,department_leader, deleted)values (4, 'Javascript', 'Javascript',1, false);
 
-INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role) VALUES(1, 'Florian', 'Dodaj', 'florian@gmail.com', 'password', '2022-02-02', 'male', '2022-02-02', 25, false, 1);
-INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role) VALUES(2, 'John', 'Smith', 'smith@gmail.com', 'password', '2021-01-02', 'male', '2000-02-02', 12, false, 2);
-INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role) VALUES(3, 'Mary', 'Jane', 'jane@gmail.com', 'password', '2006-01-02', 'female', '2012-02-02', 15, false, 3);
-INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role) VALUES(4, 'Marko', 'Obama', 'obama@gmail.com', 'password', '2005-06-02', 'male', '2010-09-02', 20, false, 4);
+INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(1, 'Florian', 'Dodaj', 'florian@gmail.com', 'password', '2022-02-02', 'male', '2022-02-02', 25, false, 1,1);
+INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(2, 'John', 'Smith', 'smith@gmail.com', 'password', '2021-01-02', 'male', '2000-02-02', 12, false, 2,2);
+INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(3, 'Mary', 'Jane', 'jane@gmail.com', 'password', '2006-01-02', 'female', '2012-02-02', 15, false, 3,3);
+INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(4, 'Marko', 'Obama', 'obama@gmail.com', 'password', '2005-06-02', 'male', '2010-09-02', 20, false, 4,4);
 
 INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted, user) values (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false,1);
 INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted,user) values (2, '2022-02-02', '2022-03-02', 'Traveling abroad', 24, 'Approved',  '2022-02-05',false,1);

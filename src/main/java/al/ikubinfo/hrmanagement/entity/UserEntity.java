@@ -56,6 +56,11 @@ public class UserEntity {
     @JoinColumn(name = "user_role")
     @JsonIgnore
     private RoleEntity role;
+
+    @ManyToOne
+    @JoinColumn(name = "user_department")
+    @JsonIgnore
+    private DepartmentEntity department;
 }
 
 

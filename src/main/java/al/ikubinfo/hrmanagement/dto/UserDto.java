@@ -33,6 +33,8 @@ public class UserDto {
     private boolean deleted;
 
     private RoleDto role;
+
+    private DepartmentDto department;
 }
 //
 //    private RequestEntity request;

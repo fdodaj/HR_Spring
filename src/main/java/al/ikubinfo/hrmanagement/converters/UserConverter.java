@@ -13,6 +13,9 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     @Autowired
     private RoleConverter roleConverter;
 
+    @Autowired
+    private DepartmentConverter departmentConverter;
+
     @Override
     public UserDto toDto(UserEntity entity) {
         UserDto dto = new UserDto();
@@ -28,6 +31,7 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         dto.setPaidTimeOff(entity.getPaidTimeOff());
         dto.setDeleted(entity.isDeleted());
         dto.setRole(roleConverter.toDto(entity.getRole()));
+        dto.setDepartment(departmentConverter.toDto(entity.getDepartment()));
         return dto;
     }
 
@@ -47,6 +51,7 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         entity.setPaidTimeOff(dto.getPaidTimeOff());
         entity.setDeleted(dto.isDeleted());
         entity.setRole(roleConverter.toEntity(dto.getRole()));
+        entity.setDepartment(departmentConverter.toEntity(dto.getDepartment()));
         return entity;
     }
 }
