@@ -2,10 +2,14 @@ package al.ikubinfo.hrmanagement.converters;
 
 import al.ikubinfo.hrmanagement.dto.RequestDto;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RequestConverter implements BidirectionalConverter<RequestDto, RequestEntity> {
+
+    @Autowired
+    private UserConverter userConverter;
 
     @Override
     public RequestDto toDto(RequestEntity entity) {
@@ -19,6 +23,7 @@ public class RequestConverter implements BidirectionalConverter<RequestDto, Requ
         dto.setDateCreated(entity.getDateCreated());
         dto.setDeleted(entity.getDeleted());
         dto.setRequestStatus(entity.getRequestStatus());
+        dto.setUser(userConverter.toMinimalUserDto(entity.getUser()));
         return dto;
     }
 
@@ -34,6 +39,7 @@ public class RequestConverter implements BidirectionalConverter<RequestDto, Requ
         entity.setDeleted(dto.isDeleted());
         entity.setToDate(dto.getToDate());
         entity.setRequestStatus(dto.getRequestStatus());
+        entity.setUser(userConverter.getEntity(dto.getUser()));
         return entity;
     }
 }

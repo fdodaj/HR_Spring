@@ -1,5 +1,6 @@
 package al.ikubinfo.hrmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,7 +47,8 @@ public class RequestEntity {
     private Boolean Deleted;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "request_user")
+    @JsonIgnore
     private UserEntity user;
 
 }

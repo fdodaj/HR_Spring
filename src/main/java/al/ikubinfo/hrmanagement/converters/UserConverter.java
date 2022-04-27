@@ -1,7 +1,9 @@
 package al.ikubinfo.hrmanagement.converters;
 
+import al.ikubinfo.hrmanagement.dto.MinimalUserDto;
 import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
+import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
 
     @Autowired
     private DepartmentConverter departmentConverter;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserDto toDto(UserEntity entity) {
@@ -35,11 +39,22 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         return dto;
     }
 
+    public MinimalUserDto toMinimalUserDto(UserEntity entity) {
+        MinimalUserDto dto = new MinimalUserDto();
+        dto.setId(entity.getId());
+        return dto;
+    }
+
+
+    public UserEntity getEntity(MinimalUserDto dto) {
+        return userRepository.getById(dto.getId());
+
+    }
+
 
     @Override
     public UserEntity toEntity(UserDto dto) {
         UserEntity entity = new UserEntity();
-
         entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());

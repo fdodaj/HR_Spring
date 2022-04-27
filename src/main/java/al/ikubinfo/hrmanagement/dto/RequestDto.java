@@ -16,6 +16,8 @@ public class RequestDto {
     private String requestStatus;
     private Date dateCreated;
     private boolean deleted;
+    private MinimalUserDto user;
+
 
 
 }

@@ -13,9 +13,9 @@ INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, h
 INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(3, 'Mary', 'Jane', 'jane@gmail.com', 'password', '2006-01-02', 'female', '2012-02-02', 15, false, 3,3);
 INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department) VALUES(4, 'Marko', 'Obama', 'obama@gmail.com', 'password', '2005-06-02', 'male', '2010-09-02', 20, false, 4,4);
 
-INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted, user) values (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false,1);
-INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted,user) values (2, '2022-02-02', '2022-03-02', 'Traveling abroad', 24, 'Approved',  '2022-02-05',false,1);
-INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted,user) values (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'Rejected', '2022-02-05', false,1);
+INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted, request_user) values (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false,1);
+INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted,request_user) values (2, '2022-02-02', '2022-03-02', 'Traveling abroad', 24, 'Approved',  '2022-02-05',false,1);
+INSERT INTO request(id,from_date, to_date, reason, business_days, request_status,date_created, deleted,request_user) values (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'Rejected', '2022-02-05', false,1);
 
 INSERT INTO holiday(id, name, description, date, active, deleted)  VALUES
  (1,'Festat e Vitit të Ri','Festat e Vitit të Ri - 01 janar','2019-01-01', 0, 0),

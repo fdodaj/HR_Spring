@@ -61,6 +61,9 @@ public class UserEntity {
     @JoinColumn(name = "user_department")
     @JsonIgnore
     private DepartmentEntity department;
+
+    @OneToMany(mappedBy = "user")
+    private List<RequestEntity> requests = new ArrayList<>();
 }
 
 

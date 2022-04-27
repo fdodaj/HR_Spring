@@ -36,9 +36,4 @@ public class UserDto {
 
     private DepartmentDto department;
 }
-//
-//    private RequestEntity request;
-//    private Set<RequestEntity> requests = new HashSet<>();
-//
-//    private Set<DepartmentEntity> departmentEntity = new HashSet<>();
 

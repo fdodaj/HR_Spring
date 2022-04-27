@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS `request`(
     request_status VARCHAR(255) NOT NULL,
     date_created VARCHAR(255) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT false,
-    user INT not null
+    request_user INT not null
 )
