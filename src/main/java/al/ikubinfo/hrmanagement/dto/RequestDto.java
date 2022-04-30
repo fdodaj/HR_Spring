@@ -19,5 +19,4 @@ public class RequestDto {
     private MinimalUserDto user;
 
 
-
 }

@@ -37,5 +37,4 @@ public class RoleEntity {
     private List<UserEntity> users = new ArrayList<>();
 
 
-
 }

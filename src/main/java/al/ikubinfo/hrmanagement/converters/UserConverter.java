@@ -4,7 +4,6 @@ import al.ikubinfo.hrmanagement.dto.MinimalUserDto;
 import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
-import al.ikubinfo.hrmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

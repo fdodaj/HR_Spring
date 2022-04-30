@@ -2,7 +2,6 @@ package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.UserConverter;
 import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;

@@ -4,66 +4,104 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import static al.ikubinfo.hrmanagement.security.ApplicationUserRoles.*;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+    private TokenProvider tokenProvider;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/request/**", "/user/**", "department/**", "role/**", "holiday/**").hasRole(ADMIN.name())
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
-    }
+    @Autowired
+    private JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    @Override
+    @Autowired
+    private JwtAuthenticationEntryPoint authenticationErrorHandler;
+
+    // Configure BCrypt password encoder
     @Bean
-    protected UserDetailsService userDetailsService(){
-        UserDetails flori = User.builder()
-                .username("flori")
-                .password(passwordEncoder.encode("password"))
-                .roles(EMPLOYEE.name())
-                .build();
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-        UserDetails linda = User.builder()
-                .username("linda")
-                .password(passwordEncoder.encode("password123"))
-                .roles(ADMIN.name())
-                .build();
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 
-        UserDetails tom = User.builder()
-                .username("tom")
-                .password(passwordEncoder.encode("tom1234"))
-                .roles(DEPARTMENT_LEADER.name())
-                .build();
+    // Configure paths and requests that should be ignored by Spring Security
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**")
+                // allow anonymous resource requests
+                .antMatchers( "/swagger-ui/**", "/v3/api-docs/**", "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/h2/**");
+    }
 
-        return new InMemoryUserDetailsManager(
-                flori,
-                linda
-        );
+    // Configure security settings
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                // we don't need CSRF because our token is invulnerable
+                .csrf().disable()
+                .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationErrorHandler)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .and().headers().frameOptions().sameOrigin()
+
+                // create no session
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/holidays/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority("ADMIN", "HR", "PD")
+                .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority("HR", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority("admin")
+                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAuthority("HR")
+//                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
+
+                .antMatchers(HttpMethod.GET, "/requests/all").hasAuthority("PD")
+                .antMatchers(HttpMethod.POST, "/requests/add").hasAuthority("EMPLOYEE")
+                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "PD")
+                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
+                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
+//                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAuthority("pm")
+//                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}/activity").hasAnyAuthority("hr", "admin")
+
+                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority("PD")
+                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAuthority("PD")
+                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority("PD")
+                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority("PD")
+//                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/addMember/{^[\\d]$}").hasAuthority("pm")
+//                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/removeMember/{^[\\d]$}").hasAuthority("pm")
+
+                .antMatchers(HttpMethod.GET, "/notifications/**").hasAnyAuthority("HR", "pm")
+
+                .anyRequest().authenticated().and().apply(securityConfigurerAdapter());
+    }
+
+    private JWTConfigurer securityConfigurerAdapter() {
+        return new JWTConfigurer(tokenProvider);
     }
 }
 

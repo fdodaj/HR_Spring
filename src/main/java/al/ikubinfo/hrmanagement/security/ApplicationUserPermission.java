@@ -24,10 +24,12 @@ public enum ApplicationUserPermission {
 
 
     private final String permissions;
+
     ApplicationUserPermission(String permissions) {
         this.permissions = permissions;
     }
-    public String getPermission(){
+
+    public String getPermission() {
         return permissions;
     }
 }

@@ -1,9 +1,6 @@
 package al.ikubinfo.hrmanagement.dto;
 
 
-import al.ikubinfo.hrmanagement.entity.RoleEntity;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
