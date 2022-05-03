@@ -57,4 +57,14 @@ public class RequestController {
     public ResponseEntity<RequestDto> updateRequest(@RequestBody RequestDto requestDto) {
         return ResponseEntity.ok(requestService.updateRequest(requestDto));
     }
+
+    @PutMapping(path = "{id}/accept")
+    public ResponseEntity<RequestDto> acceptRequest(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(requestService.acceptRequest(id), HttpStatus.OK);
+    }
+
+    @PutMapping(path = "{id}/reject")
+    public ResponseEntity<RequestDto> rejectRequest(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(requestService.rejectRequest(id), HttpStatus.OK);
+    }
 }

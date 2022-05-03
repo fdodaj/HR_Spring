@@ -41,6 +41,8 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     public MinimalUserDto toMinimalUserDto(UserEntity entity) {
         MinimalUserDto dto = new MinimalUserDto();
         dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
         return dto;
     }
 

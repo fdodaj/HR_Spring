@@ -7,5 +7,7 @@ import lombok.Setter;
 @Setter
 public class MinimalUserDto {
     private Long id;
+    private String firstName;
+    private String lastName;
 
 }

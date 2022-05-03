@@ -15,7 +15,6 @@ public class RequestConverter implements BidirectionalConverter<RequestDto, Requ
     public RequestDto toDto(RequestEntity entity) {
         RequestDto dto = new RequestDto();
 
-        dto.setId(entity.getId());
         dto.setReason(entity.getReason());
         dto.setFromDate(entity.getFromDate());
         dto.setToDate(entity.getToDate());
@@ -30,7 +29,6 @@ public class RequestConverter implements BidirectionalConverter<RequestDto, Requ
     @Override
     public RequestEntity toEntity(RequestDto dto) {
         RequestEntity entity = new RequestEntity();
-        entity.setId(dto.getId());
         entity.setReason(dto.getReason());
         entity.setFromDate(dto.getFromDate());
         entity.setToDate(dto.getToDate());

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -29,10 +30,10 @@ public class RequestEntity {
     private String reason;
 
     @Column(name = "from_date")
-    private Date fromDate;
+    private LocalDate fromDate;
 
     @Column(name = "to_date")
-    private Date toDate;
+    private LocalDate toDate;
 
     @Column(name = "business_days")
     private Integer businessDays;
@@ -41,7 +42,7 @@ public class RequestEntity {
     private String requestStatus;
 
     @Column(name = "date_created")
-    private Date dateCreated;
+    private LocalDate dateCreated;
 
     @Column(name = "deleted")
     private Boolean Deleted;
