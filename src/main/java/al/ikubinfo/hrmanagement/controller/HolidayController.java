@@ -26,7 +26,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/holiday")
+@RequestMapping(path = "/holidays")
 public class HolidayController {
 
     @Autowired

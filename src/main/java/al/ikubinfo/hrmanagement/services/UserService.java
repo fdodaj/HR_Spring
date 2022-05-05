@@ -5,9 +5,11 @@ import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -51,7 +53,13 @@ public class UserService {
     }
 
     public UserDto getUserById(Long id) {
-        UserEntity user = userRepository.getById(id);
+        if (!isLoggedInUser(id)) {
+            throw new AccessDeniedException("Access denied");
+        }
+        return getUserDto(userRepository.findById(id).get());
+    }
+
+    private UserDto getUserDto(UserEntity user) {
         return userConverter.toDto(user);
     }
 
@@ -59,6 +67,11 @@ public class UserService {
         UserEntity userEntity = userConverter.toEntity(userDto);
         userRepository.save(userEntity);
         return userDto;
+    }
+
+    private boolean isLoggedInUser(Long id) {
+        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
+        return id.equals(user.getId());
     }
 
 }

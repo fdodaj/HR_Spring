@@ -11,10 +11,10 @@ values   (1, 'Java', 'Java', 1, false),
          (4, 'Javascript', 'Javascript', 1, false);
 
 INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department)
-               VALUES (1, 'Florian', 'Dodaj', 'floriandodaj55@gmail.com','$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6', '2022-02-02', 'male', '2022-02-02', 25, false,1, 1),
-                      (2, 'John', 'Smith', 'defne02@tribalks.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2021-01-02', 'male', '2000-02-02',500, false, 2, 2),
-                      (3, 'Mary', 'Jane', 'jane@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2006-01-02', 'female', '2012-02-02', 50, false, 3, 3),
-                      (4, 'Marko', 'Obama', 'floriandodaj69@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2005-06-02', 'male', '2010-09-02', 200, false, 4, 4);
+               VALUES (1, 'Florian', 'Dodaj', 'admin@gmail.com','$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6', '2022-02-02', 'male', '2022-02-02', 25, false,1, 1),
+                      (2, 'John', 'Smith', 'hr@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2021-01-02', 'male', '2000-02-02',500, false, 2, 2),
+                      (3, 'Mary', 'Jane', 'pd@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2006-01-02', 'female', '2012-02-02', 50, false, 3, 3),
+                      (4, 'Marko', 'Obama', 'employee@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2005-06-02', 'male', '2010-09-02', 200, false, 4, 4);
 
 INSERT INTO request(id, from_date, to_date, reason, business_days, request_status, date_created, deleted, request_user)
 values  (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false, 1),

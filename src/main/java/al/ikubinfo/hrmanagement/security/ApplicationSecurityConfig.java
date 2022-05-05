@@ -73,18 +73,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/holidays/**").hasAuthority("HR")
-                .antMatchers("/requests/**").hasAuthority("ADMIN")
+                .antMatchers("/holidays/**").hasAuthority("ADMIN")
                 .antMatchers("/department/**").hasAuthority("ADMIN")
-                .antMatchers("/users/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority("HR", "PD")
                 .antMatchers(HttpMethod.POST, "/users/add").hasAuthority("HR")
                 .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority("HR")
-                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE")
+                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE", "PD")
 //                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
 
-                .antMatchers(HttpMethod.GET, "/requests/all").hasAuthority("PD")
-                .antMatchers(HttpMethod.POST, "/requests/add").hasAuthority("EMPLOYEE")
+                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority("PD", "HR")
+                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority("EMPLOYEE", "PD")
                 .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "PD")
                 .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
                 .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
@@ -98,7 +96,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/addMember/{^[\\d]$}").hasAuthority("pm")
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/removeMember/{^[\\d]$}").hasAuthority("pm")
 
-                .antMatchers(HttpMethod.GET, "/notifications/**").hasAnyAuthority("HR", "pm")
 
                 .anyRequest().authenticated().and().apply(securityConfigurerAdapter());
     }

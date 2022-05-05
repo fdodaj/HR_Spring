@@ -31,22 +31,4 @@ public class Utils {
 
         return Optional.ofNullable(email);
     }
-
-    public static UserDto getUserDto(UserEntity u) {
-        UserDto user = new UserDto();
-        user.setId(u.getId());
-        user.setFirstName(u.getFirstName());
-        user.setLastName(u.getLastName());
-        user.setEmail(u.getEmail());
-        return user;
-    }
-
-    public static UserDto getUserDto(UserDto u) {
-        UserDto user = new UserDto();
-        user.setId(u.getId());
-        user.setFirstName(u.getFirstName());
-        user.setLastName(u.getLastName());
-        user.setEmail(u.getEmail());
-        return user;
-    }
 }
