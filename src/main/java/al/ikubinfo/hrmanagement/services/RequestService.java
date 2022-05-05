@@ -1,30 +1,28 @@
 package al.ikubinfo.hrmanagement.services;
 
+import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
-import al.ikubinfo.hrmanagement.dto.HolidayDto;
+import al.ikubinfo.hrmanagement.dto.EmailMessage;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
-import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.HolidayRepository;
 import al.ikubinfo.hrmanagement.repository.RequestRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
-import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import javax.transaction.Transactional;
-import java.nio.file.AccessDeniedException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +48,8 @@ public class RequestService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private EmailService emailService;
 
 
     public RequestDto getRequestDto(RequestEntity request) {
@@ -82,6 +82,7 @@ public class RequestService {
         }
     }
 
+
     public boolean deleteRequest(Long id) {
         RequestEntity requestEntity = requestRepository.getById(id);
         requestEntity.setDeleted(true);
@@ -95,25 +96,44 @@ public class RequestService {
         return requestDto;
     }
 
-    public RequestDto acceptRequest(Long id) {
-        RequestEntity request = requestRepository.getOne(id);
-        UserEntity pm = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+    public RequestDto acceptRequest(Long id) throws RequestAlreadyProcessed{
+        RequestEntity request = requestRepository.getById(id);
         Integer businessDays = request.getBusinessDays();
-        UserEntity employee = userRepository.getById(request.getId());
-        if (employee.getPaidTimeOff() >= businessDays) {
+        UserEntity employee = userRepository.getById(request.getUser().getId());
+        if (employee.getPaidTimeOff() >= businessDays && Objects.equals(request.getRequestStatus(), "Pending")) {
             employee.setPaidTimeOff(employee.getPaidTimeOff() - businessDays);
             userRepository.save(employee);
             request.setRequestStatus("ACCEPTED");
+            EmailMessage message = new EmailMessage();
+            message.setTo(request.getUser().getEmail());
+            message.setSubject("Request accepted");
+            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " +  "\r\n" +
+                               "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
+                                "\r\n" + "ending: " + request.getToDate()  + "\r\n" + "Request created on " + request.getDateCreated() + "\r\n" +
+                                "Have a great time :)");
+            emailService.sendMail(message);
             return getRequestDto(request);
         } else {
-            return getRequestDto(request);
+            throw new RequestAlreadyProcessed("The request has already been processed");
         }
      }
 
-    public RequestDto rejectRequest(Long id) {
+    public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed{
         RequestEntity request = requestRepository.getById(id);
-        request.setRequestStatus("Rejected");
-        return getRequestDto(request);
+        if (request.getRequestStatus().equals("Pending")){
+            request.setRequestStatus("REJECTED");
+            EmailMessage message = new EmailMessage();
+            message.setTo(request.getUser().getEmail());
+            message.setSubject("Request rejected");
+            message.setMessage("Your request has been REJECTED" + "\r\n" + "Request details: " +  "\r\n" +
+                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
+                    "\r\n" + "ending: " + request.getToDate()  + "\r\n" + "Request created on " + request.getDateCreated());
+            emailService.sendMail(message);
+            return getRequestDto(request);
+        }
+        else {
+            throw new RequestAlreadyProcessed("The request has already been processed");
+        }
     }
 
     private int getBusinessDays(LocalDate from, LocalDate to) {
