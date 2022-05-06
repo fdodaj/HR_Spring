@@ -31,7 +31,7 @@ public class UserService {
     @Autowired
     private UserConverter userConverter;
 
-    public List<UserDto> getUsers() {
+    public List<UserDto>getUsers() {
         return userRepository
                 .findAll()
                 .stream()
