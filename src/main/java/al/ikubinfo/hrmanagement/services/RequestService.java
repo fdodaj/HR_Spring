@@ -11,10 +11,12 @@ import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.HolidayRepository;
 import al.ikubinfo.hrmanagement.repository.RequestRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,9 @@ public class RequestService {
     public RequestDto getRequestDto(RequestEntity request) {
         return requestConverter.toDto(request);
     }
-        public List<RequestDto> getRequests() {
+
+
+    public List<RequestDto> getRequests() {
         return requestRepository
                 .findAll()
                 .stream()
@@ -66,13 +70,12 @@ public class RequestService {
     public RequestDto createRequest(RequestDto requestDto) {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Integer businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
-        if (user.getPaidTimeOff() < businessDays ){
+        if (user.getPaidTimeOff() < businessDays) {
             System.out.println("You dont have enough PTO");
-            System.out.println("your request has " + getBusinessDays(requestDto.getFromDate(), requestDto.getToDate())+ " business days");
+            System.out.println("your request has " + getBusinessDays(requestDto.getFromDate(), requestDto.getToDate()) + " business days");
             System.out.println("Remaining PTOs: " + user.getPaidTimeOff());
-            return  requestDto;
-        }
-        else{
+            return requestDto;
+        } else {
             requestDto.setBusinessDays(businessDays);
             requestDto.setRequestStatus("Pending");
             requestDto.setDateCreated(LocalDate.now());
@@ -91,12 +94,15 @@ public class RequestService {
     }
 
     public RequestDto updateRequest(RequestDto requestDto) {
+        if (!isLoggedInUser(requestDto.getUser().getId())) {
+            throw new AccessDeniedException("Access denied");
+        }
         RequestEntity requestEntity = requestConverter.toEntity(requestDto);
         requestRepository.save(requestEntity);
         return requestDto;
     }
 
-    public RequestDto acceptRequest(Long id) throws RequestAlreadyProcessed{
+    public RequestDto acceptRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
         Integer businessDays = request.getBusinessDays();
         UserEntity employee = userRepository.getById(request.getUser().getId());
@@ -107,31 +113,30 @@ public class RequestService {
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request accepted");
-            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " +  "\r\n" +
-                               "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
-                                "\r\n" + "ending: " + request.getToDate()  + "\r\n" + "Request created on " + request.getDateCreated() + "\r\n" +
-                                "Have a great time :)");
+            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " + "\r\n" +
+                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
+                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated() + "\r\n" +
+                    "Have a great time :)");
             emailService.sendMail(message);
             return getRequestDto(request);
         } else {
             throw new RequestAlreadyProcessed("The request has already been processed");
         }
-     }
+    }
 
-    public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed{
+    public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
-        if (request.getRequestStatus().equals("Pending")){
+        if (request.getRequestStatus().equals("Pending")) {
             request.setRequestStatus("REJECTED");
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request rejected");
-            message.setMessage("Your request has been REJECTED" + "\r\n" + "Request details: " +  "\r\n" +
+            message.setMessage("Your request has been REJECTED" + "\r\n" + "Request details: " + "\r\n" +
                     "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
-                    "\r\n" + "ending: " + request.getToDate()  + "\r\n" + "Request created on " + request.getDateCreated());
+                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated());
             emailService.sendMail(message);
             return getRequestDto(request);
-        }
-        else {
+        } else {
             throw new RequestAlreadyProcessed("The request has already been processed");
         }
     }
@@ -146,17 +151,23 @@ public class RequestService {
         return businessDays;
     }
 
-     private boolean isWeekendDay(LocalDate date){
-         return (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
-     }
+    private boolean isWeekendDay(LocalDate date) {
+        return (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
+    }
 
-     private boolean isHoliday(LocalDate date){
-        int counter  = 0;
-        for (HolidayEntity holiday : holidayRepository.findAll()){
-            if (holiday.getDate().equals(date)){
+    private boolean isHoliday(LocalDate date) {
+        int counter = 0;
+        for (HolidayEntity holiday : holidayRepository.findAll()) {
+            if (holiday.getDate().equals(date)) {
                 counter++;
             }
         }
         return counter > 0;
-     }
     }
+
+
+    private boolean isLoggedInUser(Long id) {
+        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
+        return id.equals(user.getId());
+    }
+}

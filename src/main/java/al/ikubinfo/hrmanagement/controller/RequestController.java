@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/requests")
+@RequestMapping(path = "requests")
 public class RequestController {
 
     @Autowired

@@ -23,11 +23,14 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
 
-    @Autowired
-    private TokenProvider tokenProvider;
+    private final TokenProvider tokenProvider;
 
-    @Autowired
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+        this.tokenProvider = tokenProvider;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> authorize(@Valid @RequestBody LoginDto loginRequest) {

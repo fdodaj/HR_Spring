@@ -59,14 +59,14 @@ public class UserService {
         return getUserDto(userRepository.findById(id).get());
     }
 
-    private UserDto getUserDto(UserEntity user) {
-        return userConverter.toDto(user);
-    }
-
     public UserDto updateUser(UserDto userDto) {
         UserEntity userEntity = userConverter.toEntity(userDto);
         userRepository.save(userEntity);
         return userDto;
+    }
+
+    private UserDto getUserDto(UserEntity user) {
+        return userConverter.toDto(user);
     }
 
     private boolean isLoggedInUser(Long id) {
