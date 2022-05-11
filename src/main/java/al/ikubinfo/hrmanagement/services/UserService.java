@@ -53,10 +53,12 @@ public class UserService {
     }
 
     public UserDto getUserById(Long id) {
-        if (!isLoggedInUser(id)) {
+        if (isLoggedInUser(id) || isAdmin(id)) {
+            return userConverter.toDto(userRepository.findById(id).get());
+        }
+        else {
             throw new AccessDeniedException("Access denied");
         }
-        return getUserDto(userRepository.findById(id).get());
     }
 
     public UserDto updateUser(UserDto userDto) {
@@ -72,6 +74,15 @@ public class UserService {
     private boolean isLoggedInUser(Long id) {
         UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
         return id.equals(user.getId());
+    }
+
+    private boolean isAdmin(Long id){
+        boolean isAdmin = false;
+        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
+        if (user.getRole().equals(roleRepository.getById(1L))){
+            isAdmin = true;
+        }
+        return isAdmin;
     }
 
 }

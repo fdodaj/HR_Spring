@@ -36,4 +36,6 @@ public class DepartmentEntity {
     @OneToMany(mappedBy = "department")
     private List<UserEntity> users = new ArrayList<>();
 
+
+
 }

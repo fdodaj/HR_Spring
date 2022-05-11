@@ -74,11 +74,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/holidays/**").hasAuthority("ADMIN")
-                .antMatchers("/department/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/users/{^[\\d]$}").hasAnyAuthority("ADMIN", "HR", "PD", "EMPLOYEE")
                 .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority("HR", "PD", "")
                 .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority("HR", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE", "PD")
+//                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE", "PD")
 //                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
 
                 .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority("PD", "HR", "ADMIN")
@@ -89,10 +89,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAuthority("HR")
 //                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}/activity").hasAnyAuthority("hr", "admin")
 
-                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority("PD")
-                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAuthority("PD")
-                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority("PD")
-                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority("PD")
+                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAnyAuthority("PD", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/addMember/{^[\\d]$}").hasAuthority("pm")
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/removeMember/{^[\\d]$}").hasAuthority("pm")
 
