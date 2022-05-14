@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
@@ -26,13 +28,16 @@ public class TokenProvider implements InitializingBean {
     private final Logger log = LoggerFactory.getLogger(TokenProvider.class);
     private final String base64Secret;
     private final long tokenValidityInMilliseconds;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     private Key key;
 
     public TokenProvider(@Value("${jwt.base64-secret}") String base64Secret,
-                         @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
+                         @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds,
+                         AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.base64Secret = base64Secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+        this.authenticationManagerBuilder =  authenticationManagerBuilder;
     }
 
     @Override
@@ -83,4 +88,17 @@ public class TokenProvider implements InitializingBean {
         }
         return false;
     }
+
+    public String generateToken(String username, String password) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(username, password);
+        Authentication authentication =
+                authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return createToken(authentication);
+    }
+
+
+
+
 }

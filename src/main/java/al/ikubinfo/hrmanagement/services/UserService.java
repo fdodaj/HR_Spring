@@ -5,6 +5,7 @@ import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import al.ikubinfo.hrmanagement.security.TokenProvider;
 import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,10 @@ public class UserService {
 
     @Autowired
     private UserConverter userConverter;
+
+    @Autowired
+    private TokenProvider tokenProvider;
+
 
     public List<UserDto>getUsers() {
         return userRepository
@@ -83,6 +88,10 @@ public class UserService {
             isAdmin = true;
         }
         return isAdmin;
+    }
+
+    public TokenProvider getTokenProvider() {
+        return tokenProvider;
     }
 
 }
