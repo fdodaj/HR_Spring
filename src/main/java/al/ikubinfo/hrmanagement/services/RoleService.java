@@ -36,6 +36,9 @@ public class RoleService {
         return roleDto;
     }
 
+    public RoleDto getRoleById(Long id){
+        return roleConverter.toDto(roleRepository.findById(id).get());
+    }
     public boolean deleteRole(Long id) {
         RoleEntity roleEntity = roleRepository.getById(id);
         roleEntity.setDeleted(true);

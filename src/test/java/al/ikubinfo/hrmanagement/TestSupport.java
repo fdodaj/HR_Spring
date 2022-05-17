@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest(classes = HrManagementApplication.class)
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-@ActiveProfiles("dev")
 public class TestSupport {
     protected static final String PASSWORD = "password";
     protected static final String BEARER = "Bearer ";

@@ -5,6 +5,7 @@ import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
 import al.ikubinfo.hrmanagement.dto.EmailMessage;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
+import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
@@ -66,6 +67,12 @@ public class RequestService {
                 .map(requestConverter::toDto)
                 .collect(Collectors.toList());
     }
+
+
+    public RequestDto getRequestById(Long id) {
+            return requestConverter.toDto(requestRepository.getById(id));
+        }
+
 
     public RequestDto createRequest(RequestDto requestDto) {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());

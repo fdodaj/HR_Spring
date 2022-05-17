@@ -27,6 +27,10 @@ DepartmentService {
                 .collect(Collectors.toList());
     }
 
+    public DepartmentDto getDepartmentById(Long id){
+        return departmentConverter.toDto(departmentRepository.findById(id).get());
+    }
+
     public DepartmentDto addDepartment(DepartmentDto departmentDto) {
         DepartmentEntity departmentEntity = departmentConverter.toEntity(departmentDto);
         departmentRepository.save(departmentEntity);
