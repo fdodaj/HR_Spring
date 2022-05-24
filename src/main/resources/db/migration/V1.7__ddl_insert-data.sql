@@ -4,11 +4,11 @@ INSERT INTO role(id, name, description, deleted)
                    (3, 'PD', 'Pergjegjes departament', false),
                    (4, 'EMPLOYEE', 'EMPLOYEE', false);
 
-INSERT INTO department(id, name, description, department_leader, deleted)
-values   (1, 'Java', 'Java', 1, false),
-         (2, 'Python', 'Python', 2, false),
-         (3, 'c++', 'c++', 3, false),
-         (4, 'Javascript', 'Javascript', 1, false);
+INSERT INTO department(id, name, description, deleted)
+values   (1, 'Java', 'Java', false),
+         (2, 'Python', 'Python', false),
+         (3, 'c++', 'c++', false),
+         (4, 'Javascript', 'Javascript', false);
 
 INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, hire_date, paid_time_off, deleted, user_role, user_department)
                VALUES (1, 'Florian', 'Dodaj', 'admin@gmail.com','$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6', '2022-02-02', 'male', '2022-02-02', 25, false,1, 1),
@@ -36,3 +36,8 @@ VALUES (1, 'Festat e Vitit të Ri', 'Festat e Vitit të Ri - 01 janar', '2019-01
        (12, 'Dita e Çlirimit', 'Dita e Çlirimit - 29 nentor', '2019-11-29', 0, 0),
        (13, 'Dita Kombëtare e Rinisë', 'Dita Kombëtare e Rinisë - 08 dhjetor', '2019-12-08', 0, 0),
        (14, 'Krishtlindjet', 'Krishtlindjet - 25 dhjetor', '2019-12-25', 0, 0);
+
+UPDATE department SET department_leader = 1 WHERE ID = 1;
+UPDATE department SET department_leader = 2 WHERE ID = 2;
+UPDATE department SET department_leader = 3 WHERE ID = 3;
+UPDATE department SET department_leader = 4 WHERE ID = 4;

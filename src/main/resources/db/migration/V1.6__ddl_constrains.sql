@@ -1,3 +1,4 @@
 ALTER TABLE `user` ADD CONSTRAINT `user_role` FOREIGN KEY (`user_role`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `user` ADD CONSTRAINT `user_department` foreign key (`user_department`) references `department` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `request` ADD CONSTRAINT `request_user` foreign key  (`request_user`) references `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `department` ADD CONSTRAINT `department_user_fk` FOREIGN KEY (`department_leader`) references `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

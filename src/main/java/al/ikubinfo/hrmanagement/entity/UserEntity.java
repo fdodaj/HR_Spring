@@ -63,6 +63,9 @@ public class UserEntity {
     @JsonIgnore
     private DepartmentEntity department;
 
+    @OneToOne(mappedBy = "departmentLeader")
+    private DepartmentEntity departmentLeader;
+
     @OneToMany(mappedBy = "user")
     private List<RequestEntity> requests = new ArrayList<>();
 }

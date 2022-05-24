@@ -37,5 +37,8 @@ public class DepartmentEntity {
     private List<UserEntity> users = new ArrayList<>();
 
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_leader")
+    private UserEntity departmentLeader;
 
 }
