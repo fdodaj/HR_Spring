@@ -1,5 +1,6 @@
 package al.ikubinfo.hrmanagement.controller;
 
+import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
 import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
 import al.ikubinfo.hrmanagement.services.RequestService;
@@ -38,7 +39,7 @@ public class RequestController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) {
+    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) throws ActiveRequestException {
         return ResponseEntity.ok(requestService.createRequest(requestDto));
     }
 
