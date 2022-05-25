@@ -82,11 +82,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
 
                 .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority("PD", "HR", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority("EMPLOYEE", "PD")
-                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "PD")
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
-                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAuthority("EMPLOYEE")
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAuthority("HR")
+                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority("EMPLOYEE", "PD", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "PD", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAnyAuthority("HR", "ADMIN")
 //                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}/activity").hasAnyAuthority("hr", "admin")
 
                 .antMatchers(HttpMethod.POST, "/department/add").hasAuthority("PD")

@@ -67,6 +67,15 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
+    public List<RequestDto> getRequestsByUser(Long id){
+        UserEntity user = userRepository.getById(id);
+        return requestRepository
+                .findAllByUserId(user.getId())
+                .stream()
+                .map(requestConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
     public RequestDto createRequest(RequestDto requestDto) {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Integer businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
@@ -109,7 +118,7 @@ public class RequestService {
         if (employee.getPaidTimeOff() >= businessDays && Objects.equals(request.getRequestStatus(), "Pending")) {
             employee.setPaidTimeOff(employee.getPaidTimeOff() - businessDays);
             userRepository.save(employee);
-            request.setRequestStatus("ACCEPTED");
+            request.setRequestStatus("Accepted");
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request accepted");
@@ -127,7 +136,7 @@ public class RequestService {
     public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
         if (request.getRequestStatus().equals("Pending")) {
-            request.setRequestStatus("REJECTED");
+            request.setRequestStatus("Rejected");
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request rejected");

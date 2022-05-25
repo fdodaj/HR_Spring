@@ -32,6 +32,11 @@ public class RequestController {
         return new ResponseEntity<>(requestService.getRequests(), HttpStatus.OK);
     }
 
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<RequestDto>> getRequestByUser(@PathVariable Long id) {
+        return ResponseEntity.ok(requestService.getRequestsByUser(id));
+    }
+
     @PostMapping("/add")
     public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) {
         return ResponseEntity.ok(requestService.createRequest(requestDto));
