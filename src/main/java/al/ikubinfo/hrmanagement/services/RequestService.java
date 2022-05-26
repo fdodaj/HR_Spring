@@ -1,5 +1,6 @@
 package al.ikubinfo.hrmanagement.services;
 
+import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
 import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
@@ -68,15 +69,26 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
+    public List<RequestDto> getRequestsByUser(Long id){
+        UserEntity user = userRepository.getById(id);
+        return requestRepository
+                .findAllByUserId(user.getId())
+                .stream()
+                .map(requestConverter::toDto)
+                .collect(Collectors.toList());
+    }
 
-    public RequestDto getRequestById(Long id) {
-            return requestConverter.toDto(requestRepository.getById(id));
-        }
-
-
-    public RequestDto createRequest(RequestDto requestDto) {
+    public RequestDto createRequest(RequestDto requestDto) throws ActiveRequestException {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Integer businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
+        for (RequestDto request : getRequestsByUser(user.getId())){
+                if (request.getRequestStatus().equals("Accepted")){
+                    throw new ActiveRequestException("User has an active request");
+                }
+                else if(request.getRequestStatus().equals("Pending")){
+                    throw new ActiveRequestException("Your request is being processed. Please wait");
+                }
+        }
         if (user.getPaidTimeOff() < businessDays) {
             System.out.println("You dont have enough PTO");
             System.out.println("your request has " + getBusinessDays(requestDto.getFromDate(), requestDto.getToDate()) + " business days");

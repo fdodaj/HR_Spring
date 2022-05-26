@@ -18,8 +18,8 @@ INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, h
 
 INSERT INTO request(id, from_date, to_date, reason, business_days, request_status, date_created, deleted, request_user)
 values  (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false, 1),
-        (2, '2022-02-01', '2022-02-07', 'Traveling abroad', 24, 'Approved', '2022-02-05', false, 2),
-        (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'Rejected', '2022-02-05', false, 4);
+        (2, '2022-02-01', '2022-02-07', 'Traveling abroad', 24, 'Pending', '2022-02-05', false, 1),
+        (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'Pending', '2022-02-05', false, 4);
 
 INSERT INTO holiday(id, name, description, date, active, deleted)
 VALUES (1, 'Festat e Vitit të Ri', 'Festat e Vitit të Ri - 01 janar', '2019-01-01', 0, 0),
