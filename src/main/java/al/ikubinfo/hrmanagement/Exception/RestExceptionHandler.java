@@ -51,13 +51,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse("INTERNAL_SERVER_ERROR", "Empty body");
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(HttpMessageNotReadableException.class)
-//    @ResponseBody
-//    public ErrorResponse emptyFields(final Throwable ex) {
-//        log.error("Unexpected error", ex);
-//        return new ErrorResponse("BAD REQUEST", "Please enter your info");
-//    }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InsufficientPtoException.class)
+    @ResponseBody
+    public ErrorResponse handleInsufficientPto(final Throwable ex){
+        log.error("Unexpected error", ex);
+        return new ErrorResponse("NOT ENOUGH PTO", "User does not have enough Paid Time Off for this request");
+    }
+
 
 
     @Data

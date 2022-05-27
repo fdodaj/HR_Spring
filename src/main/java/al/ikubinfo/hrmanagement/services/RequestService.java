@@ -1,12 +1,14 @@
 package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
+import al.ikubinfo.hrmanagement.Exception.InsufficientPtoException;
+import al.ikubinfo.hrmanagement.Exception.InvalidDateException;
 import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
 import al.ikubinfo.hrmanagement.dto.EmailMessage;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
-import al.ikubinfo.hrmanagement.dto.UserDto;
+import al.ikubinfo.hrmanagement.dto.StatusEnum;
 import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
@@ -25,6 +27,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -69,34 +73,38 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
-    public List<RequestDto> getRequestsByUser(Long id){
-        UserEntity user = userRepository.getById(id);
+    public List<RequestDto> getActiveRequests(Long id){
         return requestRepository
-                .findAllByUserId(user.getId())
+                .findByUserIdAndRequestStatusIn(id, Arrays.asList(StatusEnum.PENDING.name(), StatusEnum.ACCEPTED.name()))
                 .stream()
                 .map(requestConverter::toDto)
                 .collect(Collectors.toList());
     }
 
-    public RequestDto createRequest(RequestDto requestDto) throws ActiveRequestException {
+    public RequestDto createRequest(RequestDto requestDto) throws ActiveRequestException, InvalidDateException, InsufficientPtoException {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Integer businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
-        for (RequestDto request : getRequestsByUser(user.getId())){
-                if (request.getRequestStatus().equals("Accepted")){
-                    throw new ActiveRequestException("User has an active request");
-                }
-                else if(request.getRequestStatus().equals("Pending")){
-                    throw new ActiveRequestException("Your request is being processed. Please wait");
-                }
+        for (RequestDto request : getActiveRequests(user.getId())){
+            if(request.getRequestStatus().equals(StatusEnum.PENDING.name())){
+                throw new ActiveRequestException("Your request is being processed. Please wait");
+            }
+            else if (request.getFromDate().isBefore(request.getToDate())){
+                throw new InvalidDateException("Please enter an valid request date");
+            }
+            else if (requestDto.getFromDate().isBefore(request.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())){
+                throw new InvalidDateException("Request  that you made on " + request.getDateCreated() + " conflicts with request are creating. Please check and try again" );
+            }
+
         }
         if (user.getPaidTimeOff() < businessDays) {
-            System.out.println("You dont have enough PTO");
-            System.out.println("your request has " + getBusinessDays(requestDto.getFromDate(), requestDto.getToDate()) + " business days");
-            System.out.println("Remaining PTOs: " + user.getPaidTimeOff());
-            return requestDto;
-        } else {
+            throw new InsufficientPtoException("Not enough pto");
+        }
+        else if (businessDays<=0){
+            throw new InvalidDateException("Please enter an valid date.");
+        }
+        else {
             requestDto.setBusinessDays(businessDays);
-            requestDto.setRequestStatus("Pending");
+            requestDto.setRequestStatus(StatusEnum.PENDING.name());
             requestDto.setDateCreated(LocalDate.now());
             RequestEntity requestEntity = requestConverter.toEntity(requestDto);
             requestRepository.save(requestEntity);
@@ -125,10 +133,10 @@ public class RequestService {
         RequestEntity request = requestRepository.getById(id);
         Integer businessDays = request.getBusinessDays();
         UserEntity employee = userRepository.getById(request.getUser().getId());
-        if (employee.getPaidTimeOff() >= businessDays && Objects.equals(request.getRequestStatus(), "Pending")) {
+        if (employee.getPaidTimeOff() >= businessDays && Objects.equals(request.getRequestStatus(), StatusEnum.PENDING.name())) {
             employee.setPaidTimeOff(employee.getPaidTimeOff() - businessDays);
             userRepository.save(employee);
-            request.setRequestStatus("ACCEPTED");
+            request.setRequestStatus(StatusEnum.ACCEPTED.name());
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request accepted");
@@ -145,8 +153,8 @@ public class RequestService {
 
     public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
-        if (request.getRequestStatus().equals("Pending")) {
-            request.setRequestStatus("REJECTED");
+        if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
+            request.setRequestStatus(StatusEnum.REJECTED.name());
             EmailMessage message = new EmailMessage();
             message.setTo(request.getUser().getEmail());
             message.setSubject("Request rejected");

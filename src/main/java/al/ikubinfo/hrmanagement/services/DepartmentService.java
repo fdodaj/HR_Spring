@@ -2,10 +2,7 @@ package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.DepartmentConverter;
 import al.ikubinfo.hrmanagement.dto.DepartmentDto;
-import al.ikubinfo.hrmanagement.dto.DepartmentLeaderDTO;
-import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.DepartmentEntity;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.DepartmentRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

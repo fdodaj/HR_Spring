@@ -16,10 +16,10 @@ INSERT INTO user(id, first_name, last_name, email, password, birthday, gender, h
                       (3, 'Mary', 'Jane', 'pd@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2006-01-02', 'female', '2012-02-02', 50, false, 3, 3),
                       (4, 'Marko', 'Obama', 'employee@gmail.com', '$2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6','2005-06-02', 'male', '2010-09-02', 200, false, 4, 4);
 
-INSERT INTO request(id, from_date, to_date, reason, business_days, request_status, date_created, deleted, request_user)
-values  (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'Pending', '2022-02-05', false, 1),
-        (2, '2022-02-01', '2022-02-07', 'Traveling abroad', 24, 'Pending', '2022-02-05', false, 1),
-        (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'Pending', '2022-02-05', false, 4);
+-- INSERT INTO request(id, from_date, to_date, reason, business_days, request_status, date_created, deleted, request_user)
+-- values  (1, '2022-02-02', '2022-02-05', 'Vacation', 2, 'ACCEPTED', '2022-02-05', false, 1),
+--         (2, '2022-02-01', '2022-02-07', 'Traveling abroad', 24, 'ACCEPTED', '2022-02-05', false, 1),
+--         (3, '2021-05-02', '2021-05-06', 'Time with family', 2, 'ACCEPTED', '2022-02-05', false, 4);
 
 INSERT INTO holiday(id, name, description, date, active, deleted)
 VALUES (1, 'Festat e Vitit të Ri', 'Festat e Vitit të Ri - 01 janar', '2019-01-01', 0, 0),

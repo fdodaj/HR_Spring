@@ -45,7 +45,7 @@ public class RequestEntity {
     private LocalDate dateCreated;
 
     @Column(name = "deleted")
-    private Boolean Deleted;
+    private Boolean deleted;
 
     @ManyToOne
     @JoinColumn(name = "request_user")

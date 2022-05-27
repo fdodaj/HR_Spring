@@ -1,6 +1,8 @@
 package al.ikubinfo.hrmanagement.controller;
 
 import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
+import al.ikubinfo.hrmanagement.Exception.InsufficientPtoException;
+import al.ikubinfo.hrmanagement.Exception.InvalidDateException;
 import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
 import al.ikubinfo.hrmanagement.services.RequestService;
@@ -35,11 +37,11 @@ public class RequestController {
 
     @GetMapping("/all/{id}")
     public ResponseEntity<List<RequestDto>> getRequestByUser(@PathVariable Long id) {
-        return ResponseEntity.ok(requestService.getRequestsByUser(id));
+        return ResponseEntity.ok(requestService.getActiveRequests(id));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) throws ActiveRequestException {
+    public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) throws ActiveRequestException, InvalidDateException, InsufficientPtoException {
         return ResponseEntity.ok(requestService.createRequest(requestDto));
     }
 
