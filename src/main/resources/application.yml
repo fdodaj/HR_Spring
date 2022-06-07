@@ -8,16 +8,14 @@ spring:
     baseline-on-migrate: true
     table: SCHEMA_HISTORY
 
-  h2:
-    console:
-      path: /h2
-      enabled: true
+
   datasource:
-    url: jdbc:h2:mem:mydb
-#    url: jdbc:h2:file:~/test;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/DB
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
 
   mail:
     host: smtp.gmail.com
@@ -42,3 +40,4 @@ jwt:
 server:
   error:
     include-stacktrace: never
+  port: 8090
