@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.Exception;
+package al.ikubinfo.hrmanagement.exception;
 
 public class RequestAlreadyProcessed extends Exception {
     public RequestAlreadyProcessed(String errorMessage){

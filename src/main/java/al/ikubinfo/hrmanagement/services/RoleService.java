@@ -4,6 +4,7 @@ import al.ikubinfo.hrmanagement.converters.RoleConverter;
 import al.ikubinfo.hrmanagement.dto.RoleDto;
 import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
+import al.ikubinfo.hrmanagement.security.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +37,9 @@ public class RoleService {
         return roleDto;
     }
 
+
     public RoleDto getRoleById(Long id){
-        return roleConverter.toDto(roleRepository.findById(id).get());
+        return roleConverter.toDto(roleRepository.findById(id).orElseThrow(null));
     }
     public boolean deleteRole(Long id) {
         RoleEntity roleEntity = roleRepository.getById(id);
@@ -50,6 +52,10 @@ public class RoleService {
         RoleEntity roleEntity = roleConverter.toEntity(roleDto);
         roleRepository.save(roleEntity);
         return roleDto;
+    }
+
+    public Long getIdByName(RoleEnum roleEnum){
+        return roleRepository.findByName(roleEnum.name()).getId();
     }
 
 }

@@ -1,9 +1,4 @@
 package al.ikubinfo.hrmanagement.services;//package al.ikubinfo.hrmanagement.services;
-//
-//import al.ikubinfo.hrmanagement.entity.RequestEntity;
-//import al.ikubinfo.hrmanagement.entity.UserEntity;
-//import al.ikubinfo.hrmanagement.repository.RequestRepository;
-//import al.ikubinfo.hrmanagement.repository.UserRepository;
 
 import al.ikubinfo.hrmanagement.dto.EmailMessage;
 import org.springframework.beans.factory.annotation.Autowired;

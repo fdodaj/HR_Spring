@@ -1,14 +1,12 @@
 package al.ikubinfo.hrmanagement.services;
 
-import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
-import al.ikubinfo.hrmanagement.Exception.InsufficientPtoException;
-import al.ikubinfo.hrmanagement.Exception.InvalidDateException;
-import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
-import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
-import al.ikubinfo.hrmanagement.dto.EmailMessage;
-import al.ikubinfo.hrmanagement.dto.RequestDto;
-import al.ikubinfo.hrmanagement.dto.StatusEnum;
+import al.ikubinfo.hrmanagement.dto.*;
+import al.ikubinfo.hrmanagement.exception.ActiveRequestException;
+import al.ikubinfo.hrmanagement.exception.InsufficientPtoException;
+import al.ikubinfo.hrmanagement.exception.InvalidDateException;
+import al.ikubinfo.hrmanagement.exception.RequestAlreadyProcessed;
+import al.ikubinfo.hrmanagement.converters.RequestConverter;
 import al.ikubinfo.hrmanagement.entity.HolidayEntity;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
@@ -18,24 +16,21 @@ import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 @Slf4j
 public class RequestService {
     @Autowired
@@ -51,14 +46,12 @@ public class RequestService {
     private HolidayRepository holidayRepository;
 
     @Autowired
-    private UserConverter userConverter;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private UserConverter userConverter;
+
+    private List<LocalDate> holidays;
 
     public RequestDto getRequestDto(RequestEntity request) {
         return requestConverter.toDto(request);
@@ -73,7 +66,7 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
-    public List<RequestDto> getActiveRequests(Long id){
+    public List<RequestDto> getActiveRequests(Long id) {
         return requestRepository
                 .findByUserIdAndRequestStatusIn(id, Arrays.asList(StatusEnum.PENDING.name(), StatusEnum.ACCEPTED.name()))
                 .stream()
@@ -83,29 +76,26 @@ public class RequestService {
 
     public RequestDto createRequest(RequestDto requestDto) throws ActiveRequestException, InvalidDateException, InsufficientPtoException {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-        Integer businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
-        for (RequestDto request : getActiveRequests(user.getId())){
-            if(request.getRequestStatus().equals(StatusEnum.PENDING.name())){
+        int businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
+        for (RequestDto request : getActiveRequests(user.getId())) {
+            if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
                 throw new ActiveRequestException("Your request is being processed. Please wait");
-            }
-            else if (request.getFromDate().isBefore(request.getToDate())){
+            } else if (request.getFromDate().isBefore(request.getToDate())) {
                 throw new InvalidDateException("Please enter an valid request date");
-            }
-            else if (requestDto.getFromDate().isBefore(request.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())){
-                throw new InvalidDateException("Request  that you made on " + request.getDateCreated() + " conflicts with request are creating. Please check and try again" );
+            } else if (requestDto.getFromDate().isBefore(request.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())) {
+                throw new InvalidDateException("Request  that you made on " + request.getDateCreated() + " conflicts with request are creating. Please check and try again");
             }
 
         }
         if (user.getPaidTimeOff() < businessDays) {
             throw new InsufficientPtoException("Not enough pto");
-        }
-        else if (businessDays<=0){
+        } else if (businessDays <= 0) {
             throw new InvalidDateException("Please enter an valid date.");
-        }
-        else {
+        } else {
             requestDto.setBusinessDays(businessDays);
             requestDto.setRequestStatus(StatusEnum.PENDING.name());
             requestDto.setDateCreated(LocalDate.now());
+            requestDto.setUser(getLoggedInUser());
             RequestEntity requestEntity = requestConverter.toEntity(requestDto);
             requestRepository.save(requestEntity);
             return getRequestDto(requestEntity);
@@ -115,7 +105,7 @@ public class RequestService {
 
     public boolean deleteRequest(Long id) {
         RequestEntity requestEntity = requestRepository.getById(id);
-        requestEntity.setDeleted(true);
+        requestEntity.setDeleted(true); // soft delete
         requestRepository.save(requestEntity);
         return true;
     }
@@ -125,6 +115,7 @@ public class RequestService {
             throw new AccessDeniedException("Access denied");
         }
         RequestEntity requestEntity = requestConverter.toEntity(requestDto);
+        requestDto.setUser(getLoggedInUser());
         requestRepository.save(requestEntity);
         return requestDto;
     }
@@ -151,6 +142,11 @@ public class RequestService {
         }
     }
 
+    private MinimalUserDto getLoggedInUser(){
+        String email = Utils.getCurrentEmail().orElse(null);
+        return userConverter.toMinimalUserDto(userRepository.getById(userRepository.findByEmail(email).getId()));
+
+    }
     public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
         if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
@@ -183,18 +179,27 @@ public class RequestService {
     }
 
     private boolean isHoliday(LocalDate date) {
-        int counter = 0;
-        for (HolidayEntity holiday : holidayRepository.findAll()) {
-            if (holiday.getDate().equals(date)) {
-                counter++;
-            }
-        }
-        return counter > 0;
+        return holidays.contains(date);
     }
 
 
     private boolean isLoggedInUser(Long id) {
-        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
-        return id.equals(user.getId());
+
+        Optional<String> optionalMail = Utils.getCurrentEmail();
+
+        if(optionalMail.isPresent()) {
+            UserEntity user = userRepository.findByEmail(optionalMail.get());
+            return id.equals(user.getId());
+        }
+        return false;
+
+    }
+
+    @PostConstruct
+    private void populateHolidays() {
+        holidays = holidayRepository.findAll()
+                .stream()
+                .map(HolidayEntity::getDate)
+                .collect(Collectors.toList());
     }
 }

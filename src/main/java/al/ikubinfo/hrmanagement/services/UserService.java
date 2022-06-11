@@ -5,15 +5,20 @@ import al.ikubinfo.hrmanagement.dto.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import al.ikubinfo.hrmanagement.security.RoleEnum;
 import al.ikubinfo.hrmanagement.security.TokenProvider;
 import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,8 +63,9 @@ public class UserService {
     }
 
     public UserDto getUserById(Long id) {
-        if (isLoggedInUser(id) || isAdmin(id)) {
-            return userConverter.toDto(userRepository.findById(id).get());
+        Long userId = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null)).getId();
+        if (isLoggedInUser(id) || isAdmin(userId)){
+            return userConverter.toDto(userRepository.findById(id).orElseThrow(null));
         }
         else {
             throw new AccessDeniedException("Access denied");
@@ -72,22 +78,15 @@ public class UserService {
         return userDto;
     }
 
-    private UserDto getUserDto(UserEntity user) {
-        return userConverter.toDto(user);
-    }
-
     private boolean isLoggedInUser(Long id) {
-        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
+        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null));
         return id.equals(user.getId());
     }
 
     private boolean isAdmin(Long id){
-        boolean isAdmin = false;
-        UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().get());
-        if (user.getRole().equals(roleRepository.getById(1L))){
-            isAdmin = true;
-        }
-        return isAdmin;
+        UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return RoleEnum.ADMIN.name().equalsIgnoreCase(userEntity.getRole().getName());
+
     }
 
     public TokenProvider getTokenProvider() {

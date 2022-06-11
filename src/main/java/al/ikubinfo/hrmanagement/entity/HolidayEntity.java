@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Where(clause = "deleted=0")
@@ -30,7 +30,7 @@ public class HolidayEntity {
     private String description;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "active")
     private Boolean active;

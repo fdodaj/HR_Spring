@@ -1,9 +1,9 @@
 package al.ikubinfo.hrmanagement.converters;
 
-public interface BidirectionalConverter<DTO, ENTITY> {
+public interface BidirectionalConverter<D, E> {
 
-    DTO toDto(ENTITY entity);
+    D toDto(E entity);
 
-    ENTITY toEntity(DTO dto);
+    E toEntity(D dto);
 
 }

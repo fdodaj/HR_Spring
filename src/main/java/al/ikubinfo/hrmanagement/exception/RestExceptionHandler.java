@@ -1,64 +1,56 @@
-package al.ikubinfo.hrmanagement.Exception;
+package al.ikubinfo.hrmanagement.exception;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @ControllerAdvice
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
+    private static final String NOT_ENOUGH_PTO = "NOT_ENOUGH_PTO";
+    private static final  String UNEXPECTED_ERROR = "UNEXPECTED_ERROR";
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseBody
     public ErrorResponse handleThrowable(final Throwable ex) {
-        log.error("Unexpected error", ex);
-        return new ErrorResponse("INTERNAL_SERVER_ERROR", "Entity not found. Please enter a valid ID");
+        log.error(UNEXPECTED_ERROR, ex);
+        return new ErrorResponse(INTERNAL_SERVER_ERROR, "Entity not found. Please enter a valid ID");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseBody
     public ErrorResponse handleNotFound(final Throwable ex) {
-        log.error("Unexpected error", ex);
-        return new ErrorResponse("INTERNAL_SERVER_ERROR", "Entity not found. Please enter a valid ID");
+        log.error(UNEXPECTED_ERROR, ex);
+        return new ErrorResponse(INTERNAL_SERVER_ERROR, "Entity not found. Please enter a valid ID");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public ErrorResponse handleNullPointer(final Throwable ex) {
-        log.error("Unexpected error", ex);
-        return new ErrorResponse("INTERNAL_SERVER_ERROR", "Empty body");
+        log.error(UNEXPECTED_ERROR, ex);
+        return new ErrorResponse(INTERNAL_SERVER_ERROR, "Empty body");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(InsufficientPtoException.class)
     @ResponseBody
     public ErrorResponse handleInsufficientPto(final Throwable ex){
-        log.error("Unexpected error", ex);
-        return new ErrorResponse("NOT ENOUGH PTO", "User does not have enough Paid Time Off for this request");
+        log.error(UNEXPECTED_ERROR, ex);
+        return new ErrorResponse(NOT_ENOUGH_PTO, "User does not have enough Paid Time Off for this request");
     }
-
 
 
     @Data

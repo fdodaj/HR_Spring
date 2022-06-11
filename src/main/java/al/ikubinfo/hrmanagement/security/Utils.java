@@ -1,7 +1,4 @@
 package al.ikubinfo.hrmanagement.security;
-
-import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,4 +28,5 @@ public class Utils {
 
         return Optional.ofNullable(email);
     }
+
 }

@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.Exception;
+package al.ikubinfo.hrmanagement.exception;
 
 public class ActiveRequestException extends Exception{
     public ActiveRequestException(String errorMessage){

@@ -3,7 +3,6 @@ package al.ikubinfo.hrmanagement.controller;
 
 import al.ikubinfo.hrmanagement.dto.RoleDto;
 import al.ikubinfo.hrmanagement.services.RoleService;
-import al.ikubinfo.hrmanagement.services.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -12,7 +11,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,6 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
-    private UserService userService;
 
     @Operation(security = @SecurityRequirement(name = "basicAuth"))
     @GetMapping("/all")
@@ -51,7 +48,7 @@ public class RoleController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<RoleDto> deleteRole(@PathVariable("id") Long id) {
         roleService.deleteRole(id);
-        return new ResponseEntity("Role deleted", HttpStatus.NO_CONTENT);
+        return  ResponseEntity.ok(roleService.getRoleById(id));
     }
 
     @Operation(security = @SecurityRequirement(name = "basicAuth"))

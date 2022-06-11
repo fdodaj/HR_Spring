@@ -22,6 +22,8 @@ import org.springframework.web.filter.CorsFilter;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+
+
     @Autowired
     private TokenProvider tokenProvider;
 
@@ -73,26 +75,26 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/holidays/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/users/{^[\\d]$}").hasAnyAuthority("ADMIN", "HR", "PD", "EMPLOYEE")
-                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority("HR", "PD", "")
-                .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority("HR", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority("ADMIN")
+                .antMatchers("/holidays/**").hasAuthority(RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.GET,"/users/{^[\\d]$}").hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.HR.name(), RoleEnum.PD.name(), RoleEnum.EMPLOYEE.name())
+                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.PD.name(), "")
+                .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
 //                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE", "PD")
 //                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
 
-                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority("PD", "HR", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority("EMPLOYEE", "PD", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "PD", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAnyAuthority("EMPLOYEE", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAnyAuthority("HR", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.HR.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(),RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.ADMIN.name())
 //                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}/activity").hasAnyAuthority("hr", "admin")
 
-                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAnyAuthority("PD", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority(RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/addMember/{^[\\d]$}").hasAuthority("pm")
 //                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}/removeMember/{^[\\d]$}").hasAuthority("pm")
 

@@ -8,7 +8,6 @@ import al.ikubinfo.hrmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +32,7 @@ DepartmentService {
     }
 
     public DepartmentDto getDepartmentById(Long id){
-        return departmentConverter.toDto(departmentRepository.findById(id).get());
+        return departmentConverter.toDto(departmentRepository.findById(id).orElse(null));
     }
 
     public DepartmentDto addDepartment(DepartmentDto departmentDto) {

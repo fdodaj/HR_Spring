@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +47,7 @@ public class HolidayController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<HolidayDto> deleteHoliday(@PathVariable("id") Long id) {
         holidayService.deleteHoliday(id);
-        return new ResponseEntity("Holiday deleted", HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(security = @SecurityRequirement(name = "basicAuth"))

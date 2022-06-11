@@ -1,5 +1,7 @@
 spring:
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       dialect: org.hibernate.dialect.H2Dialect
   flyway:
@@ -15,8 +17,6 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
-
   mail:
     host: smtp.gmail.com
     port: 25
@@ -28,9 +28,6 @@ spring:
           auth: true
           starttls:
             enable: true
-
-
-
 
 jwt:
   header: Authorization

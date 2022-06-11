@@ -1,20 +1,13 @@
 package al.ikubinfo.hrmanagement.controller;
 
-import al.ikubinfo.hrmanagement.Exception.ActiveRequestException;
-import al.ikubinfo.hrmanagement.Exception.InsufficientPtoException;
-import al.ikubinfo.hrmanagement.Exception.InvalidDateException;
-import al.ikubinfo.hrmanagement.Exception.RequestAlreadyProcessed;
+import al.ikubinfo.hrmanagement.exception.ActiveRequestException;
+import al.ikubinfo.hrmanagement.exception.InsufficientPtoException;
+import al.ikubinfo.hrmanagement.exception.InvalidDateException;
+import al.ikubinfo.hrmanagement.exception.RequestAlreadyProcessed;
 import al.ikubinfo.hrmanagement.dto.RequestDto;
 import al.ikubinfo.hrmanagement.services.RequestService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

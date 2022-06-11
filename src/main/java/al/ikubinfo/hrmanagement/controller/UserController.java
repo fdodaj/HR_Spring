@@ -1,23 +1,14 @@
 package al.ikubinfo.hrmanagement.controller;
 
 import al.ikubinfo.hrmanagement.dto.UserDto;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.services.UserService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 
 @RestController
@@ -42,7 +33,7 @@ public class UserController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<UserDto> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return new ResponseEntity("User deleted", HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PutMapping(path = "/{id}")
