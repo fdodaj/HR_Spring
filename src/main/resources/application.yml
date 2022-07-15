@@ -1,4 +1,9 @@
 spring:
+  h2:
+    console.enabled: true
+  main:
+    allow-bean-definition-overriding: true
+
   jpa:
     hibernate:
       ddl-auto: create
@@ -38,3 +43,5 @@ server:
   error:
     include-stacktrace: never
   port: 8090
+
+

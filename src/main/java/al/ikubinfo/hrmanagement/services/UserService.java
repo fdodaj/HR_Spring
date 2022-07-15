@@ -17,6 +17,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +32,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -47,6 +52,12 @@ public class UserService {
                 .stream()
                 .map(userConverter::toDto)
                 .collect(Collectors.toList());
+    }
+
+
+    public List<UserEntity> getAllUsersWithTenPtoOrLower() {
+        TypedQuery<UserEntity> query = entityManager.createNamedQuery("User.findAllWithLowerPtoThanTen", UserEntity.class);
+        return query.getResultList();
     }
 
     public UserDto addUser(UserDto userDto) {

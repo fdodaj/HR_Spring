@@ -46,6 +46,7 @@ public class RequestEntity {
     @Column(name = "deleted")
     private Boolean deleted;
 
+
     @ManyToOne
     @JoinColumn(name = "request_user")
     @JsonIgnore

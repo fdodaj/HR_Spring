@@ -85,7 +85,6 @@ public class RequestService {
             } else if (requestDto.getFromDate().isBefore(request.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())) {
                 throw new InvalidDateException("Request  that you made on " + request.getDateCreated() + " conflicts with request are creating. Please check and try again");
             }
-
         }
         if (user.getPaidTimeOff() < businessDays) {
             throw new InsufficientPtoException("Not enough pto");
@@ -128,14 +127,14 @@ public class RequestService {
             employee.setPaidTimeOff(employee.getPaidTimeOff() - businessDays);
             userRepository.save(employee);
             request.setRequestStatus(StatusEnum.ACCEPTED.name());
-            EmailMessage message = new EmailMessage();
-            message.setTo(request.getUser().getEmail());
-            message.setSubject("Request accepted");
-            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " + "\r\n" +
-                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
-                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated() + "\r\n" +
-                    "Have a great time :)");
-            emailService.sendMail(message);
+//            EmailMessage message = new EmailMessage();
+//            message.setTo(request.getUser().getEmail());
+//            message.setSubject("Request accepted");
+//            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " + "\r\n" +
+//                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
+//                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated() + "\r\n" +
+//                    "Have a great time :)");
+//            emailService.sendMail(message);
             return getRequestDto(request);
         } else {
             throw new RequestAlreadyProcessed("The request has already been processed");
@@ -151,13 +150,13 @@ public class RequestService {
         RequestEntity request = requestRepository.getById(id);
         if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
             request.setRequestStatus(StatusEnum.REJECTED.name());
-            EmailMessage message = new EmailMessage();
-            message.setTo(request.getUser().getEmail());
-            message.setSubject("Request rejected");
-            message.setMessage("Your request has been REJECTED" + "\r\n" + "Request details: " + "\r\n" +
-                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
-                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated());
-            emailService.sendMail(message);
+//            EmailMessage message = new EmailMessage();
+//            message.setTo(request.getUser().getEmail());
+//            message.setSubject("Request rejected");
+//            message.setMessage("Your request has been REJECTED" + "\r\n" + "Request details: " + "\r\n" +
+//                    "reason: " + request.getReason() + "\r\n" + "starting:  " + request.getFromDate() +
+//                    "\r\n" + "ending: " + request.getToDate() + "\r\n" + "Request created on " + request.getDateCreated());
+//            emailService.sendMail(message);
             return getRequestDto(request);
         } else {
             throw new RequestAlreadyProcessed("The request has already been processed");

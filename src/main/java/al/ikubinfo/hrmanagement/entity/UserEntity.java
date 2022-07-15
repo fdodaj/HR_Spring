@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Where(clause = "deleted = 0")
 @Table(name = "user")
+@NamedQuery(name = "User.findAllWithLowerPtoThanTen", query = "SELECT user FROM UserEntity user where user.paidTimeOff < 10 ")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -61,11 +62,12 @@ public class UserEntity {
     @JoinColumn(name = "user_department")
     @JsonIgnore
     private DepartmentEntity department;
+//
+//    @OneToOne(mappedBy = "departmentLeader")
+//    private DepartmentEntity departmentLeader;
 
-    @OneToOne(mappedBy = "departmentLeader")
-    private DepartmentEntity departmentLeader;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<RequestEntity> requests = new ArrayList<>();
 }
 

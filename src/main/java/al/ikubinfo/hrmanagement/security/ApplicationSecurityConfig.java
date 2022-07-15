@@ -56,7 +56,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**")
                 // allow anonymous resource requests
-                .antMatchers( "/swagger-ui/**", "/v3/api-docs/**", "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/h2/**");
+                .antMatchers( "/swagger-ui/**", "/v3/api-docs/**", "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/h2/**", "/users/all", "/requests/all");
     }
 
     // Configure security settings
@@ -77,13 +77,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/holidays/**").hasAuthority(RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.GET,"/users/{^[\\d]$}").hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.HR.name(), RoleEnum.PD.name(), RoleEnum.EMPLOYEE.name())
-                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.PD.name(), "")
+                .antMatchers(HttpMethod.GET,"/all/less-than-ten").hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.HR.name(), RoleEnum.PD.name(), RoleEnum.EMPLOYEE.name())
+//                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.PD.name(), "")
                 .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
 //                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}").hasAnyAuthority("HR", "EMPLOYEE", "PD")
 //                .antMatchers(HttpMethod.PUT, "users/{^[\\d]$}/changeRole/**").hasAuthority("admin")
 
-                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.HR.name(), RoleEnum.ADMIN.name())
+//                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.HR.name(), RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(),RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(), RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.ADMIN.name())
