@@ -16,13 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Configuration
-@SecurityScheme(
-        name = "basicAuth", // can be set to anything
-        type = SecuritySchemeType.HTTP,
-        scheme = "basic"
-)
-@OpenAPIDefinition(info = @Info(title = "Sample API", version = "v1"))
+
 
 
 @RestController
@@ -32,26 +26,26 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @Operation(security = @SecurityRequirement(name = "basicAuth"))
+
     @GetMapping("/all")
     public ResponseEntity<List<RoleDto>> getRoles() {
         return ResponseEntity.ok(roleService.getRole());
     }
 
-    @Operation(security = @SecurityRequirement(name = "basicAuth"))
+
     @PostMapping("/add")
     public ResponseEntity<RoleDto> addRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.addRole(roleDto));
     }
 
-    @Operation(security = @SecurityRequirement(name = "basicAuth"))
+
     @DeleteMapping(path = "{id}")
     public ResponseEntity<RoleDto> deleteRole(@PathVariable("id") Long id) {
         roleService.deleteRole(id);
         return  ResponseEntity.ok(roleService.getRoleById(id));
     }
 
-    @Operation(security = @SecurityRequirement(name = "basicAuth"))
+
     @PutMapping(path = "{id}")
     public ResponseEntity<RoleDto> updateRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.updateRole(roleDto));
