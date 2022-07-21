@@ -41,15 +41,6 @@ You need  [Java](https://www.oracle.com/java/technologies/javase/jdk11-archive-d
 
 4. Go to http://localhost:8080/swagger-ui.html 
 
-5. Log in as admin, employee, pd(department leader) or hr
-
-```
-      {
-        "email": "[roleName]@gmail.com",
-        "password": "password"
-      }
-      
-```
 
 ## Tech Stack used in the project:
 
