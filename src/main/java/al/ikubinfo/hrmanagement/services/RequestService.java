@@ -1,7 +1,9 @@
 package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.UserConverter;
-import al.ikubinfo.hrmanagement.dto.*;
+import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
+import al.ikubinfo.hrmanagement.dto.requestdtos.StatusEnum;
+import al.ikubinfo.hrmanagement.dto.userdtos.MinimalUserDto;
 import al.ikubinfo.hrmanagement.exception.ActiveRequestException;
 import al.ikubinfo.hrmanagement.exception.InsufficientPtoException;
 import al.ikubinfo.hrmanagement.exception.InvalidDateException;
@@ -13,6 +15,7 @@ import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.HolidayRepository;
 import al.ikubinfo.hrmanagement.repository.RequestRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
+import al.ikubinfo.hrmanagement.security.RoleEnum;
 import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -101,24 +104,6 @@ public class RequestService {
         }
     }
 
-
-    public boolean deleteRequest(Long id) {
-        RequestEntity requestEntity = requestRepository.getById(id);
-        requestEntity.setDeleted(true); // soft delete
-        requestRepository.save(requestEntity);
-        return true;
-    }
-
-    public RequestDto updateRequest(RequestDto requestDto) {
-        if (!isLoggedInUser(requestDto.getUser().getId())) {
-            throw new AccessDeniedException("Access denied");
-        }
-        RequestEntity requestEntity = requestConverter.toEntity(requestDto);
-        requestDto.setUser(getLoggedInUser());
-        requestRepository.save(requestEntity);
-        return requestDto;
-    }
-
     public RequestDto acceptRequest(Long id) throws RequestAlreadyProcessed {
         RequestEntity request = requestRepository.getById(id);
         Integer businessDays = request.getBusinessDays();
@@ -140,6 +125,25 @@ public class RequestService {
             throw new RequestAlreadyProcessed("The request has already been processed");
         }
     }
+
+    public boolean deleteRequest(Long id) {
+        RequestEntity requestEntity = requestRepository.getById(id);
+        requestEntity.setDeleted(true); // soft delete
+        requestRepository.save(requestEntity);
+        return true;
+    }
+
+    public RequestDto updateRequest(RequestDto requestDto) {
+        if (!isLoggedInUser(requestDto.getUser().getId())) {
+            throw new AccessDeniedException("Access denied");
+        }
+        RequestEntity requestEntity = requestConverter.toEntity(requestDto);
+        requestDto.setUser(getLoggedInUser());
+        requestRepository.save(requestEntity);
+        return requestDto;
+    }
+
+
 
     private MinimalUserDto getLoggedInUser(){
         String email = Utils.getCurrentEmail().orElse(null);
@@ -191,7 +195,6 @@ public class RequestService {
             return id.equals(user.getId());
         }
         return false;
-
     }
 
     @PostConstruct

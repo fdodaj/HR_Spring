@@ -1,6 +1,6 @@
 package al.ikubinfo.hrmanagement.controller;
 
-import al.ikubinfo.hrmanagement.dto.LoginDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.LoginDto;
 import al.ikubinfo.hrmanagement.security.JWTFilter;
 import al.ikubinfo.hrmanagement.security.TokenProvider;
 import org.springframework.http.HttpHeaders;

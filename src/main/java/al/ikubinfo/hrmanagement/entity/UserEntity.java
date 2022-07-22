@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,19 +40,22 @@ public class UserEntity {
     private String password;
 
     @Column(name = "birthday")
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(name = "gender")
     private String gender;
 
     @Column(name = "hire_date")
-    private Date hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "paid_time_off")
     private int paidTimeOff;
 
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
+
+    @Column(name = "leader")
+    private boolean departmentLeader;
 
     @ManyToOne
     @JoinColumn(name = "user_role")
@@ -62,13 +66,13 @@ public class UserEntity {
     @JoinColumn(name = "user_department")
     @JsonIgnore
     private DepartmentEntity department;
-//
-//    @OneToOne(mappedBy = "departmentLeader")
-//    private DepartmentEntity departmentLeader;
+
 
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<RequestEntity> requests = new ArrayList<>();
+
+
 }
 
 

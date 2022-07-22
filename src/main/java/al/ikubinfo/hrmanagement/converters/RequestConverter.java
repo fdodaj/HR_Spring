@@ -1,6 +1,6 @@
 package al.ikubinfo.hrmanagement.converters;
 
-import al.ikubinfo.hrmanagement.dto.RequestDto;
+import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

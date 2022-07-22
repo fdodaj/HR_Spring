@@ -1,4 +1,4 @@
-package al.ikubinfo.hrmanagement.dto;
+package al.ikubinfo.hrmanagement.dto.departmentdtos;
 
 import lombok.Getter;
 import lombok.Setter;

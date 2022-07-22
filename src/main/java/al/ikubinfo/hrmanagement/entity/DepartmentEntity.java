@@ -1,5 +1,6 @@
 package al.ikubinfo.hrmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,9 +37,5 @@ public class DepartmentEntity {
     @OneToMany(mappedBy = "department")
     private List<UserEntity> users = new ArrayList<>();
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_leader")
-    private UserEntity departmentLeader;
 
 }

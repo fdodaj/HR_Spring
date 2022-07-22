@@ -1,6 +1,7 @@
 package al.ikubinfo.hrmanagement.converters;
 
-import al.ikubinfo.hrmanagement.dto.RoleDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.MinimalRoleDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,20 @@ public class RoleConverter implements BidirectionalConverter<RoleDto, RoleEntity
         dto.setName(entity.getName());
         dto.setDeleted(entity.getDeleted());
         return dto;
+    }
+
+    public MinimalRoleDto toMinimalRoleDto(RoleEntity entity){
+        MinimalRoleDto dto = new MinimalRoleDto();
+        dto.setId(entity.getId());
+        return dto;
+
+    }
+
+    public RoleEntity toMinimalRoleEntity(MinimalRoleDto dto){
+        RoleEntity entity = new RoleEntity();
+        entity.setId(dto.getId());
+        return entity;
+
     }
 
     @Override

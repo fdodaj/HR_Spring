@@ -1,17 +1,17 @@
 package al.ikubinfo.hrmanagement.controller;
 
 
-import al.ikubinfo.hrmanagement.dto.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.departmentdtos.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
+import al.ikubinfo.hrmanagement.entity.UserEntity;
+import al.ikubinfo.hrmanagement.exception.AccessNotGranted;
+import al.ikubinfo.hrmanagement.repository.DepartmentRepository;
+import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.services.DepartmentService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +23,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/all")

@@ -1,8 +1,10 @@
 package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.UserConverter;
-import al.ikubinfo.hrmanagement.dto.UserDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.NewUserDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
+import al.ikubinfo.hrmanagement.exception.AccessNotGranted;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.security.RoleEnum;
@@ -12,16 +14,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +46,9 @@ public class UserService {
     private TokenProvider tokenProvider;
 
 
+
+
+
     public List<UserDto>getUsers() {
         return userRepository
                 .findAll()
@@ -60,8 +63,8 @@ public class UserService {
         return query.getResultList();
     }
 
-    public UserDto addUser(UserDto userDto) {
-        UserEntity userEntity = userConverter.toEntity(userDto);
+    public NewUserDto addUser(NewUserDto userDto) {
+        UserEntity userEntity = userConverter.toMinimalEntity(userDto);
         userRepository.save(userEntity);
         return userDto;
     }

@@ -1,6 +1,7 @@
 package al.ikubinfo.hrmanagement.converters;
 
-import al.ikubinfo.hrmanagement.dto.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.departmentdtos.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.departmentdtos.MinimalDepartmentDto;
 import al.ikubinfo.hrmanagement.entity.DepartmentEntity;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,14 @@ public class DepartmentConverter implements BidirectionalConverter<DepartmentDto
         return dto;
     }
 
-    @Override
+    public DepartmentEntity toMinimalDepartmentEntity(MinimalDepartmentDto dto) {
+
+        DepartmentEntity entity = new DepartmentEntity();
+        entity.setId(dto.getId());
+        return entity;
+    }
+
+        @Override
     public DepartmentEntity toEntity(DepartmentDto dto) {
 
         DepartmentEntity entity = new DepartmentEntity();

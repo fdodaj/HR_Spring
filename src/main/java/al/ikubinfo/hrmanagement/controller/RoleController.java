@@ -1,16 +1,9 @@
 package al.ikubinfo.hrmanagement.controller;
 
 
-import al.ikubinfo.hrmanagement.dto.RoleDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import al.ikubinfo.hrmanagement.services.RoleService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

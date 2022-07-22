@@ -1,24 +1,22 @@
 package al.ikubinfo.hrmanagement;
 import al.ikubinfo.hrmanagement.converters.RoleConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
-import al.ikubinfo.hrmanagement.dto.*;
-import al.ikubinfo.hrmanagement.repository.RequestRepository;
+import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.LoginDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.services.DepartmentService;
-import al.ikubinfo.hrmanagement.services.RequestService;
 import al.ikubinfo.hrmanagement.services.RoleService;
 import al.ikubinfo.hrmanagement.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -129,9 +127,9 @@ public class controllerTest extends TestSupport {
             userDto.setLastName("TEST");
             userDto.setEmail("TEST");
             userDto.setPassword("TEST");
-            userDto.setBirthday(new Date(2002 - 2 - 2));
+            userDto.setBirthday(LocalDate.now());
             userDto.setGender("TEST");
-            userDto.setHireDate(new Date(2020 - 2 - 2));
+            userDto.setHireDate(LocalDate.now());
             userDto.setPaidTimeOff(25);
             userDto.setDeleted(false);
             userDto.setRole(roleService.getRoleById(1L));

@@ -1,9 +1,12 @@
-package al.ikubinfo.hrmanagement.dto;
+package al.ikubinfo.hrmanagement.dto.userdtos;
 
 
+import al.ikubinfo.hrmanagement.dto.departmentdtos.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,11 +22,11 @@ public class UserDto {
 
     private String password;
 
-    private Date birthday;
+    private LocalDate birthday;
 
     private String gender;
 
-    private Date hireDate;
+    private LocalDate hireDate;
 
     private int paidTimeOff;
 

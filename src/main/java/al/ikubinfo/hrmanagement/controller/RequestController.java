@@ -4,7 +4,7 @@ import al.ikubinfo.hrmanagement.exception.ActiveRequestException;
 import al.ikubinfo.hrmanagement.exception.InsufficientPtoException;
 import al.ikubinfo.hrmanagement.exception.InvalidDateException;
 import al.ikubinfo.hrmanagement.exception.RequestAlreadyProcessed;
-import al.ikubinfo.hrmanagement.dto.RequestDto;
+import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
 import al.ikubinfo.hrmanagement.services.RequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

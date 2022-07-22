@@ -1,7 +1,7 @@
 package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.RoleConverter;
-import al.ikubinfo.hrmanagement.dto.RoleDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.security.RoleEnum;

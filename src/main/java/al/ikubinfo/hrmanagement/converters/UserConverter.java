@@ -1,11 +1,15 @@
 package al.ikubinfo.hrmanagement.converters;
 
-import al.ikubinfo.hrmanagement.dto.MinimalUserDto;
-import al.ikubinfo.hrmanagement.dto.UserDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.MinimalUserDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.NewUserDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 
 @Component
@@ -18,6 +22,9 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     private DepartmentConverter departmentConverter;
     @Autowired
     private UserRepository userRepository;
+
+    @Value("${startingPto}")
+    private int startingPto;
 
     @Override
     public UserDto toDto(UserEntity entity) {
@@ -46,14 +53,44 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     }
 
 
+
     public UserEntity getEntity(MinimalUserDto dto) {
         return userRepository.getById(dto.getId());
 
     }
 
 
-    @Override
-    public UserEntity toEntity(UserDto dto) {
+    public UserEntity ToMinimalUserDto(NewUserDto dto){
+        UserEntity entity = new UserEntity();
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
+        entity.setBirthday(dto.getBirthday());
+        entity.setGender(dto.getGender());
+        entity.setRole(roleConverter.toMinimalRoleEntity(dto.getRole()));
+        entity.setDepartment(departmentConverter.toMinimalDepartmentEntity(dto.getDepartment()));
+        return entity;
+    }
+
+    public UserEntity toMinimalEntity(NewUserDto dto) {
+        UserEntity entity = new UserEntity();
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
+        entity.setBirthday(dto.getBirthday());
+        entity.setGender(dto.getGender());
+        entity.setHireDate(LocalDate.now());
+        entity.setPaidTimeOff(startingPto);
+        entity.setRole(roleConverter.toMinimalRoleEntity(dto.getRole()));
+        entity.setDepartment(departmentConverter.toMinimalDepartmentEntity(dto.getDepartment()));
+        return entity;
+    }
+
+
+        @Override
+        public UserEntity toEntity(UserDto dto) {
         UserEntity entity = new UserEntity();
         entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());

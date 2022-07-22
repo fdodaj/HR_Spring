@@ -1,5 +1,6 @@
-package al.ikubinfo.hrmanagement.dto;
+package al.ikubinfo.hrmanagement.dto.requestdtos;
 
+import al.ikubinfo.hrmanagement.dto.userdtos.MinimalUserDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +16,4 @@ public class RequestDto {
     private LocalDate dateCreated;
     private boolean deleted;
     private MinimalUserDto user;
-
-
-
-
 }
