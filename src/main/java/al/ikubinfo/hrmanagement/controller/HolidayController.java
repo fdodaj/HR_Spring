@@ -19,13 +19,13 @@ public class HolidayController {
     private HolidayService holidayService;
 
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<HolidayDto>> getHoliday() {
         return ResponseEntity.ok(holidayService.getHoliday());
     }
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<HolidayDto> addHoliday(@RequestBody HolidayDto holidayDto) {
         return ResponseEntity.ok(holidayService.addHoliday(holidayDto));
     }

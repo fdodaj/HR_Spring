@@ -23,17 +23,17 @@ public class RequestController {
     private RequestService requestService;
 
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<RequestDto>> getRequests() {
         return new ResponseEntity<>(requestService.getRequests(), HttpStatus.OK);
     }
 
-    @GetMapping("/all/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<List<RequestDto>> getRequestByUser(@PathVariable Long id) {
         return ResponseEntity.ok(requestService.getActiveRequests(id));
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto requestDto) throws ActiveRequestException, InvalidDateException, InsufficientPtoException {
         return ResponseEntity.ok(requestService.createRequest(requestDto));
     }

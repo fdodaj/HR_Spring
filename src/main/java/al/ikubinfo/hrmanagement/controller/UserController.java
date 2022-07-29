@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<UserDto> getUsers() {
         return userService.getUsers();
     }
@@ -38,14 +38,14 @@ public class UserController {
 
 
 
-    @GetMapping("/all/less-than-ten")
+    @GetMapping("/less-than-ten")
     public ResponseEntity<List<UserEntity>> getUsersWithLowerPtoThanTen() {
         return new ResponseEntity<>(userService.getAllUsersWithTenPtoOrLower(), HttpStatus.OK);
     }
 
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<NewUserDto> addUser(@RequestBody NewUserDto userDto) {
         return ResponseEntity.ok(userService.addUser(userDto));
     }

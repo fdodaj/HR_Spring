@@ -28,13 +28,13 @@ public class DepartmentController {
     private UserRepository userRepository;
 
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<DepartmentDto>> getDepartments() {
         return ResponseEntity.ok(departmentService.getDepartment());
     }
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<DepartmentDto> addDepartment(@RequestBody DepartmentDto departmentDto) {
         return ResponseEntity.ok(departmentService.addDepartment(departmentDto));
     }

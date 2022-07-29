@@ -13,20 +13,20 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/role")
+@RequestMapping(path = "/roles")
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<RoleDto>> getRoles() {
         return ResponseEntity.ok(roleService.getRole());
     }
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<RoleDto> addRole(@RequestBody RoleDto roleDto) {
         return ResponseEntity.ok(roleService.addRole(roleDto));
     }

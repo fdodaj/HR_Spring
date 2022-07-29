@@ -217,3 +217,244 @@ select userentity0_.id as id1_4_, userentity0_.birthday as birthday2_4_, userent
 2022-07-22 18:17:31 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-07-22 18:17:31 [restartedMain] INFO  a.i.h.HrManagementApplication - Started HrManagementApplication in 6.181 seconds (JVM running for 7.724)
 2022-07-22 18:17:37 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-29 17:32:39 [restartedMain] INFO  a.i.h.HrManagementApplication - Starting HrManagementApplication using Java 11.0.16 on DESKTOP-G9LVEFO with PID 9484 (C:\Users\User\Desktop\hr-spring\target\classes started by User in C:\Users\User\Desktop\hr-spring)
+2022-07-29 17:32:39 [restartedMain] INFO  a.i.h.HrManagementApplication - No active profile set, falling back to default profiles: default
+2022-07-29 17:32:39 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\User\.m2\repository\org\apache\derby\derby\10.14.2.0\derby-10.14.2.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_cs.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_de_DE.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_es.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_fr.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_hu.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_it.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ja_JP.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ko_KR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pl.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pt_BR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ru.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_CN.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_TW.jar
+2022-07-29 17:32:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-29 17:32:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-29 17:32:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-29 17:32:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 199 ms. Found 5 JPA repository interfaces.
+2022-07-29 17:32:46 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-07-29 17:32:46 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-07-29 17:32:46 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-07-29 17:32:47 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-07-29 17:32:47 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7967 ms
+2022-07-29 17:32:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-07-29 17:32:48 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-07-29 17:32:48 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2'. Database available at 'jdbc:h2:mem:mydb'
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.4 by Redgate
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:h2:mem:mydb (H2 1.4)
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 7 migrations (execution time 00:00.089s)
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "PUBLIC"."SCHEMA_HISTORY" ...
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": << Empty Schema >>
+2022-07-29 17:32:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.1 - ddl create user"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.2 - ddl create department"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.3 - ddl create holiday"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.4 - ddl create request"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.5 - ddl create role"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.6 - ddl constrains"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.7 - ddl insert-data"
+2022-07-29 17:32:50 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 7 migrations to schema "PUBLIC", now at version v1.7 (execution time 00:00.786s)
+2022-07-29 17:32:51 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-29 17:32:51 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.1.Final
+2022-07-29 17:32:52 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-29 17:32:52 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-07-29 17:32:55 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-29 17:32:55 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:32:57 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', OPTIONS] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/swagger-ui/**'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/v3/api-docs/**'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/*.html'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/favicon.ico'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.html'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.css'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.js'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/h2/**'] with []
+2022-07-29 17:32:58 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ce8ce92, org.springframework.security.web.context.SecurityContextPersistenceFilter@268138e1, org.springframework.security.web.header.HeaderWriterFilter@57aae114, org.springframework.security.web.authentication.logout.LogoutFilter@5c9e76da, org.springframework.web.filter.CorsFilter@23fd6755, al.ikubinfo.hrmanagement.security.JWTFilter@4d600c8a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@112e463d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50ecf169, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7ded94c3, org.springframework.security.web.session.SessionManagementFilter@7f8cf2ad, org.springframework.security.web.access.ExceptionTranslationFilter@58cc03bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@dadc839]
+2022-07-29 17:33:02 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-07-29 17:33:02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-29 17:33:02 [restartedMain] INFO  a.i.h.HrManagementApplication - Started HrManagementApplication in 25.116 seconds (JVM running for 26.772)
+2022-07-29 17:33:15 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-29 17:33:17 [http-nio-8080-exec-8] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1108 ms
+2022-07-29 17:43:24 [Thread-6] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:43:25 [Thread-6] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2022-07-29 17:43:25 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-07-29 17:43:25 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-07-29 17:43:25 [restartedMain] INFO  a.i.h.HrManagementApplication - Starting HrManagementApplication using Java 11.0.16 on DESKTOP-G9LVEFO with PID 9484 (C:\Users\User\Desktop\hr-spring\target\classes started by User in C:\Users\User\Desktop\hr-spring)
+2022-07-29 17:43:25 [restartedMain] INFO  a.i.h.HrManagementApplication - No active profile set, falling back to default profiles: default
+2022-07-29 17:43:26 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-29 17:43:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 165 ms. Found 5 JPA repository interfaces.
+2022-07-29 17:43:27 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-07-29 17:43:27 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-07-29 17:43:27 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-07-29 17:43:27 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-07-29 17:43:27 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2125 ms
+2022-07-29 17:43:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2022-07-29 17:43:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2022-07-29 17:43:27 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2'. Database available at 'jdbc:h2:mem:mydb'
+2022-07-29 17:43:27 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.4 by Redgate
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:h2:mem:mydb (H2 1.4)
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 7 migrations (execution time 00:00.019s)
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "PUBLIC"."SCHEMA_HISTORY" ...
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": << Empty Schema >>
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.1 - ddl create user"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.2 - ddl create department"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.3 - ddl create holiday"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.4 - ddl create request"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.5 - ddl create role"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.6 - ddl constrains"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.7 - ddl insert-data"
+2022-07-29 17:43:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 7 migrations to schema "PUBLIC", now at version v1.7 (execution time 00:00.269s)
+2022-07-29 17:43:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-29 17:43:28 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-07-29 17:43:28 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-29 17:43:28 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:43:29 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', OPTIONS] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/swagger-ui/**'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/v3/api-docs/**'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/*.html'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/favicon.ico'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.html'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.css'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.js'] with []
+2022-07-29 17:43:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/h2/**'] with []
+2022-07-29 17:43:30 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2beade6e, org.springframework.security.web.context.SecurityContextPersistenceFilter@100641bb, org.springframework.security.web.header.HeaderWriterFilter@12a26ac7, org.springframework.security.web.authentication.logout.LogoutFilter@5573de37, org.springframework.web.filter.CorsFilter@48202c74, al.ikubinfo.hrmanagement.security.JWTFilter@4f021461, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6efa6d36, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f0fd67c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3220c659, org.springframework.security.web.session.SessionManagementFilter@5b286cb7, org.springframework.security.web.access.ExceptionTranslationFilter@472724a1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@167d645c]
+2022-07-29 17:43:32 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-07-29 17:43:32 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-29 17:43:32 [restartedMain] INFO  a.i.h.HrManagementApplication - Started HrManagementApplication in 7.417 seconds (JVM running for 657.114)
+2022-07-29 17:43:32 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2022-07-29 17:43:38 [restartedMain] INFO  a.i.h.HrManagementApplication - Starting HrManagementApplication using Java 11.0.16 on DESKTOP-G9LVEFO with PID 8756 (C:\Users\User\Desktop\hr-spring\target\classes started by User in C:\Users\User\Desktop\hr-spring)
+2022-07-29 17:43:38 [restartedMain] INFO  a.i.h.HrManagementApplication - No active profile set, falling back to default profiles: default
+2022-07-29 17:43:38 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\User\.m2\repository\org\apache\derby\derby\10.14.2.0\derby-10.14.2.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_cs.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_de_DE.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_es.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_fr.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_hu.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_it.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ja_JP.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ko_KR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pl.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pt_BR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ru.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_CN.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_TW.jar
+2022-07-29 17:43:38 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-29 17:43:38 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-29 17:43:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-29 17:43:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 262 ms. Found 5 JPA repository interfaces.
+2022-07-29 17:43:45 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-07-29 17:43:45 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-07-29 17:43:45 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-07-29 17:43:46 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-07-29 17:43:46 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7489 ms
+2022-07-29 17:43:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-07-29 17:43:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-07-29 17:43:47 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2'. Database available at 'jdbc:h2:mem:mydb'
+2022-07-29 17:43:47 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.4 by Redgate
+2022-07-29 17:43:47 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:h2:mem:mydb (H2 1.4)
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 7 migrations (execution time 00:00.103s)
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "PUBLIC"."SCHEMA_HISTORY" ...
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": << Empty Schema >>
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.1 - ddl create user"
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.2 - ddl create department"
+2022-07-29 17:43:48 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.3 - ddl create holiday"
+2022-07-29 17:43:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.4 - ddl create request"
+2022-07-29 17:43:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.5 - ddl create role"
+2022-07-29 17:43:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.6 - ddl constrains"
+2022-07-29 17:43:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.7 - ddl insert-data"
+2022-07-29 17:43:49 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 7 migrations to schema "PUBLIC", now at version v1.7 (execution time 00:00.756s)
+2022-07-29 17:43:49 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-29 17:43:50 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.1.Final
+2022-07-29 17:43:51 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-29 17:43:51 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-07-29 17:43:53 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-29 17:43:54 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:43:56 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', OPTIONS] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/swagger-ui/**'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/v3/api-docs/**'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/*.html'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/favicon.ico'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.html'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.css'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.js'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/h2/**'] with []
+2022-07-29 17:43:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a9f7abd, org.springframework.security.web.context.SecurityContextPersistenceFilter@64301ecb, org.springframework.security.web.header.HeaderWriterFilter@40e22c03, org.springframework.security.web.authentication.logout.LogoutFilter@7a91d940, org.springframework.web.filter.CorsFilter@5e3248a4, al.ikubinfo.hrmanagement.security.JWTFilter@5f30cd1c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@726846f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39ba5368, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a854f40, org.springframework.security.web.session.SessionManagementFilter@32889c75, org.springframework.security.web.access.ExceptionTranslationFilter@5845ae40, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@63ababec]
+2022-07-29 17:43:59 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2022-07-29 17:43:59 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-07-29 17:43:59 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:44:00 [restartedMain] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2022-07-29 17:44:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-07-29 17:44:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-07-29 17:44:00 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2022-07-29 17:44:00 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-29 17:44:00 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-07-29 17:44:26 [restartedMain] INFO  a.i.h.HrManagementApplication - Starting HrManagementApplication using Java 11.0.16 on DESKTOP-G9LVEFO with PID 4120 (C:\Users\User\Desktop\hr-spring\target\classes started by User in C:\Users\User\Desktop\hr-spring)
+2022-07-29 17:44:26 [restartedMain] INFO  a.i.h.HrManagementApplication - No active profile set, falling back to default profiles: default
+2022-07-29 17:44:27 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\User\.m2\repository\org\apache\derby\derby\10.14.2.0\derby-10.14.2.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_cs.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_de_DE.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_es.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_fr.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_hu.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_it.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ja_JP.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ko_KR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pl.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_pt_BR.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_ru.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_CN.jar,file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derbyLocale_zh_TW.jar
+2022-07-29 17:44:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-29 17:44:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-29 17:44:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-29 17:44:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 256 ms. Found 5 JPA repository interfaces.
+2022-07-29 17:44:33 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-07-29 17:44:33 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-07-29 17:44:33 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-07-29 17:44:33 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-07-29 17:44:33 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6208 ms
+2022-07-29 17:44:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-07-29 17:44:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-07-29 17:44:34 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2'. Database available at 'jdbc:h2:mem:mydb'
+2022-07-29 17:44:34 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.4 by Redgate
+2022-07-29 17:44:34 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:h2:mem:mydb (H2 1.4)
+2022-07-29 17:44:35 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 7 migrations (execution time 00:00.273s)
+2022-07-29 17:44:35 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "PUBLIC"."SCHEMA_HISTORY" ...
+2022-07-29 17:44:35 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": << Empty Schema >>
+2022-07-29 17:44:35 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.1 - ddl create user"
+2022-07-29 17:44:35 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.2 - ddl create department"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.3 - ddl create holiday"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.4 - ddl create request"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.5 - ddl create role"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.6 - ddl constrains"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "1.7 - ddl insert-data"
+2022-07-29 17:44:36 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 7 migrations to schema "PUBLIC", now at version v1.7 (execution time 00:00.746s)
+2022-07-29 17:44:37 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-29 17:44:37 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.1.Final
+2022-07-29 17:44:38 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-29 17:44:38 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-07-29 17:44:41 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-29 17:44:41 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:44:44 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', OPTIONS] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/swagger-ui/**'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/v3/api-docs/**'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/*.html'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/favicon.ico'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.html'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.css'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**/*.js'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/h2/**'] with []
+2022-07-29 17:44:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ffd21ba, org.springframework.security.web.context.SecurityContextPersistenceFilter@58813f0d, org.springframework.security.web.header.HeaderWriterFilter@6f919660, org.springframework.security.web.authentication.logout.LogoutFilter@50929bc0, org.springframework.web.filter.CorsFilter@6d857f7a, al.ikubinfo.hrmanagement.security.JWTFilter@739bf824, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73f070dc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@489ea19f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11d326d6, org.springframework.security.web.session.SessionManagementFilter@4177281f, org.springframework.security.web.access.ExceptionTranslationFilter@433c69a8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7467a218]
+2022-07-29 17:44:49 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2022-07-29 17:44:49 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-07-29 17:44:49 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-29 17:44:49 [restartedMain] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2022-07-29 17:44:49 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-07-29 17:44:49 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-07-29 17:44:49 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2022-07-29 17:44:49 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-29 17:44:49 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-07-29 17:44:49 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
