@@ -2,14 +2,10 @@ package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.DepartmentConverter;
 import al.ikubinfo.hrmanagement.dto.departmentdtos.DepartmentDto;
-import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.entity.DepartmentEntity;
-import al.ikubinfo.hrmanagement.entity.UserEntity;
-import al.ikubinfo.hrmanagement.exception.AccessNotGranted;
 import al.ikubinfo.hrmanagement.repository.DepartmentRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +19,6 @@ DepartmentService {
 
     @Autowired
     private DepartmentConverter departmentConverter;
-
-    @Autowired
-    private UserRepository userRepository;
-
 
     public List<DepartmentDto> getDepartment() {
         return departmentRepository

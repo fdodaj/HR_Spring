@@ -51,11 +51,7 @@
 			<version>${jjwt.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>LATEST</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -140,11 +136,11 @@
 	<build>
 		<plugins>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>8.0.0</version>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 

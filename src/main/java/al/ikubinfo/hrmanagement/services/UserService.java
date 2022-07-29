@@ -46,9 +46,6 @@ public class UserService {
     private TokenProvider tokenProvider;
 
 
-
-
-
     public List<UserDto>getUsers() {
         return userRepository
                 .findAll()

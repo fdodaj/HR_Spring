@@ -15,7 +15,6 @@ import al.ikubinfo.hrmanagement.entity.UserEntity;
 import al.ikubinfo.hrmanagement.repository.HolidayRepository;
 import al.ikubinfo.hrmanagement.repository.RequestRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
-import al.ikubinfo.hrmanagement.security.RoleEnum;
 import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-@Slf4j
 public class RequestService {
     @Autowired
     private RequestRepository requestRepository;
@@ -48,8 +46,8 @@ public class RequestService {
     @Autowired
     private HolidayRepository holidayRepository;
 
-    @Autowired
-    private EmailService emailService;
+    // @Autowired
+    // private EmailService emailService;
 
     @Autowired
     private UserConverter userConverter;
@@ -77,7 +75,7 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
-    public RequestDto createRequest(RequestDto requestDto) throws ActiveRequestException, InvalidDateException, InsufficientPtoException {
+    public RequestDto createRequest(RequestDto requestDto) {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         int businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
         for (RequestDto request : getActiveRequests(user.getId())) {
