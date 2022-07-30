@@ -29,7 +29,11 @@ public class DepartmentController {
 
 
     @GetMapping()
-    public ResponseEntity<List<DepartmentDto>> getDepartments() {
+    public ResponseEntity<List<DepartmentDto>> getDepartments(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
         return ResponseEntity.ok(departmentService.getDepartment());
     }
 

@@ -1,17 +1,14 @@
 package al.ikubinfo.hrmanagement.controller;
 
-import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
+
 import al.ikubinfo.hrmanagement.dto.userdtos.NewUserDto;
 import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
-import al.ikubinfo.hrmanagement.exception.AccessNotGranted;
-import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,23 +24,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping()
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<List<UserEntity>> getUsers(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy){
+            return new ResponseEntity<>(userService.getUsers(pageNo, pageSize, sortBy),
+                                       HttpStatus.OK);
     }
-
-
 
 
     @GetMapping("/less-than-ten")
     public ResponseEntity<List<UserEntity>> getUsersWithLowerPtoThanTen() {
         return new ResponseEntity<>(userService.getAllUsersWithTenPtoOrLower(), HttpStatus.OK);
     }
-
-
 
     @PostMapping()
     public ResponseEntity<NewUserDto> addUser(@RequestBody NewUserDto userDto) {

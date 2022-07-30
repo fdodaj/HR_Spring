@@ -22,14 +22,22 @@ public class RequestController {
     @Autowired
     private RequestService requestService;
 
-
     @GetMapping()
-    public ResponseEntity<List<RequestDto>> getRequests() {
-        return new ResponseEntity<>(requestService.getRequests(), HttpStatus.OK);
+    public ResponseEntity<List<RequestDto>> getRequests(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ){
+        return new ResponseEntity<>(requestService.getRequests(pageNo, pageSize, sortBy),
+                                     HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<List<RequestDto>> getRequestByUser(@PathVariable Long id) {
+    public ResponseEntity<List<RequestDto>> getRequestByUser(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
         return ResponseEntity.ok(requestService.getActiveRequests(id));
     }
 

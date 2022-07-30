@@ -6,6 +6,9 @@ import al.ikubinfo.hrmanagement.entity.RoleEntity;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.security.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +23,11 @@ public class RoleService {
     @Autowired
     private RoleConverter roleConverter;
 
-    public List<RoleDto> getRole() {
-
+    public List<RoleDto> getRole(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
         return roleRepository
-                .findAll()
+                .findAll(paging)
                 .stream()
                 .map(roleConverter::toDto)
                 .collect(Collectors.toList());

@@ -13,6 +13,10 @@ import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,20 +42,18 @@ public class UserService {
     EntityManager entityManager;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
     private UserConverter userConverter;
 
     @Autowired
     private TokenProvider tokenProvider;
 
 
-    public List<UserDto>getUsers() {
+    public List<UserEntity>getUsers(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
         return userRepository
-                .findAll()
+                .findAll(paging)
                 .stream()
-                .map(userConverter::toDto)
                 .collect(Collectors.toList());
     }
 

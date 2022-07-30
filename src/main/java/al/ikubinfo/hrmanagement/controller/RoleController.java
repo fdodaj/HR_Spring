@@ -4,6 +4,7 @@ package al.ikubinfo.hrmanagement.controller;
 import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import al.ikubinfo.hrmanagement.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,12 @@ public class RoleController {
 
 
     @GetMapping()
-    public ResponseEntity<List<RoleDto>> getRoles() {
-        return ResponseEntity.ok(roleService.getRole());
+    public ResponseEntity<List<RoleDto>> getRoles(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        return new ResponseEntity<>(roleService.getRole(pageNo, pageSize, sortBy),
+                                    HttpStatus.OK);
     }
 
 

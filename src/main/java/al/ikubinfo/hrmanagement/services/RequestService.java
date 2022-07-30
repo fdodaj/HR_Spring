@@ -19,6 +19,9 @@ import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -59,15 +62,18 @@ public class RequestService {
     }
 
 
-    public List<RequestDto> getRequests() {
+    public List<RequestDto> getRequests(Integer pageNo, Integer pageSize, String sortBy) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         return requestRepository
-                .findAll()
+                .findAll(paging)
                 .stream()
                 .map(requestConverter::toDto)
                 .collect(Collectors.toList());
     }
 
     public List<RequestDto> getActiveRequests(Long id) {
+
         return requestRepository
                 .findByUserIdAndRequestStatusIn(id, Arrays.asList(StatusEnum.PENDING.name(), StatusEnum.ACCEPTED.name()))
                 .stream()

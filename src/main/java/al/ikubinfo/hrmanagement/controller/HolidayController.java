@@ -20,7 +20,11 @@ public class HolidayController {
 
 
     @GetMapping()
-    public ResponseEntity<List<HolidayDto>> getHoliday() {
+    public ResponseEntity<List<HolidayDto>> getHoliday(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
         return ResponseEntity.ok(holidayService.getHoliday());
     }
 
