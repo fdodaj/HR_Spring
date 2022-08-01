@@ -48,7 +48,7 @@ public class UserService {
     private TokenProvider tokenProvider;
 
 
-    public List<UserEntity>getUsers(Integer pageNo, Integer pageSize, String sortBy, Long roleId) {
+    public List<UserDto>getUsers(Integer pageNo, Integer pageSize, String sortBy, Long roleId) {
 
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
@@ -59,6 +59,7 @@ public class UserService {
 
         return page
                 .stream()
+                .map(userConverter::toDto)
                 .collect(Collectors.toList());
     }
 

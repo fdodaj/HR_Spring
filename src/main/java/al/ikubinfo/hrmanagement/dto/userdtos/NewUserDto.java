@@ -25,8 +25,8 @@ public class NewUserDto {
 
     private String gender;
 
-    private MinimalRoleDto role;
+    private Long role;
 
-    private MinimalDepartmentDto department;
+    private Long department;
 }
 

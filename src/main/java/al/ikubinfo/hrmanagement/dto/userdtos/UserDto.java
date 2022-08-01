@@ -2,6 +2,8 @@ package al.ikubinfo.hrmanagement.dto.userdtos;
 
 
 import al.ikubinfo.hrmanagement.dto.departmentdtos.DepartmentDto;
+import al.ikubinfo.hrmanagement.dto.departmentdtos.MinimalDepartmentDto;
+import al.ikubinfo.hrmanagement.dto.roledtos.MinimalRoleDto;
 import al.ikubinfo.hrmanagement.dto.roledtos.RoleDto;
 import lombok.Getter;
 import lombok.Setter;

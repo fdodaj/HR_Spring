@@ -25,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping()
-    public ResponseEntity<List<UserEntity>> getUsers(
+    public ResponseEntity<List<UserDto>> getUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(required = false) Long roleId,

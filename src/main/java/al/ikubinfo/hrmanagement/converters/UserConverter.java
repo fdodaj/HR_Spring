@@ -4,6 +4,8 @@ import al.ikubinfo.hrmanagement.dto.userdtos.MinimalUserDto;
 import al.ikubinfo.hrmanagement.dto.userdtos.NewUserDto;
 import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
+import al.ikubinfo.hrmanagement.repository.DepartmentRepository;
+import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,10 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     private DepartmentConverter departmentConverter;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Value("${startingPto}")
     private int startingPto;
@@ -53,7 +59,6 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
     }
 
 
-
     public UserEntity getEntity(MinimalUserDto dto) {
         return userRepository.getById(dto.getId());
 
@@ -68,8 +73,8 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         entity.setPassword(dto.getPassword());
         entity.setBirthday(dto.getBirthday());
         entity.setGender(dto.getGender());
-        entity.setRole(roleConverter.toMinimalRoleEntity(dto.getRole()));
-        entity.setDepartment(departmentConverter.toMinimalDepartmentEntity(dto.getDepartment()));
+        entity.setRole(roleRepository.getById(dto.getRole()));
+        entity.setDepartment(departmentRepository.getById(dto.getDepartment()));
         return entity;
     }
 
@@ -83,8 +88,8 @@ public class UserConverter implements BidirectionalConverter<UserDto, UserEntity
         entity.setGender(dto.getGender());
         entity.setHireDate(LocalDate.now());
         entity.setPaidTimeOff(startingPto);
-        entity.setRole(roleConverter.toMinimalRoleEntity(dto.getRole()));
-        entity.setDepartment(departmentConverter.toMinimalDepartmentEntity(dto.getDepartment()));
+        entity.setRole(roleRepository.getById(dto.getRole()));
+        entity.setDepartment(departmentRepository.getById(dto.getDepartment()));
         return entity;
     }
 
