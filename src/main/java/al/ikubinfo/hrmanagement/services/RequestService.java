@@ -1,6 +1,7 @@
 package al.ikubinfo.hrmanagement.services;
 
 import al.ikubinfo.hrmanagement.converters.UserConverter;
+import al.ikubinfo.hrmanagement.dto.requestdtos.NewRequestDto;
 import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
 import al.ikubinfo.hrmanagement.dto.requestdtos.StatusEnum;
 import al.ikubinfo.hrmanagement.dto.userdtos.MinimalUserDto;
@@ -19,6 +20,7 @@ import al.ikubinfo.hrmanagement.security.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -62,13 +64,15 @@ public class RequestService {
     }
 
 
-    public List<RequestDto> getRequests(Integer pageNo, Integer pageSize, String sortBy) {
+    public List<RequestEntity> getRequests(Integer pageNo, Integer pageSize, String sortBy,String requestStatus ) {
 
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        return requestRepository
-                .findAll(paging)
-                .stream()
-                .map(requestConverter::toDto)
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<RequestEntity> page = requestStatus != null ?
+                requestRepository.findAllByRequestStatus(requestStatus, pageable) :
+                requestRepository.findAll(pageable);
+
+        return page.stream()
                 .collect(Collectors.toList());
     }
 
@@ -77,20 +81,20 @@ public class RequestService {
         return requestRepository
                 .findByUserIdAndRequestStatusIn(id, Arrays.asList(StatusEnum.PENDING.name(), StatusEnum.ACCEPTED.name()))
                 .stream()
-                .map(requestConverter::toDto)
+                .map(requestConverter:: toDto )
                 .collect(Collectors.toList());
     }
 
-    public RequestDto createRequest(RequestDto requestDto) {
+    public NewRequestDto createRequest(NewRequestDto newRequestDto) {
         UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-        int businessDays = getBusinessDays(requestDto.getFromDate(), requestDto.getToDate());
+        int businessDays = getBusinessDays(newRequestDto.getFromDate(), newRequestDto.getToDate());
         for (RequestDto request : getActiveRequests(user.getId())) {
             if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
                 throw new ActiveRequestException("Your request is being processed. Please wait");
-            } else if (request.getFromDate().isBefore(request.getToDate())) {
+            } else if (newRequestDto.getFromDate().isAfter(newRequestDto.getToDate())) {
                 throw new InvalidDateException("Please enter an valid request date");
-            } else if (requestDto.getFromDate().isBefore(request.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())) {
-                throw new InvalidDateException("Request  that you made on " + request.getDateCreated() + " conflicts with request are creating. Please check and try again");
+            } else if (newRequestDto.getFromDate().isAfter(newRequestDto.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())) {
+                throw new InvalidDateException("Yoy have merging request dates. Please check and try again");
             }
         }
         if (user.getPaidTimeOff() < businessDays) {
@@ -98,13 +102,18 @@ public class RequestService {
         } else if (businessDays <= 0) {
             throw new InvalidDateException("Please enter an valid date.");
         } else {
-            requestDto.setBusinessDays(businessDays);
-            requestDto.setRequestStatus(StatusEnum.PENDING.name());
-            requestDto.setDateCreated(LocalDate.now());
-            requestDto.setUser(getLoggedInUser());
-            RequestEntity requestEntity = requestConverter.toEntity(requestDto);
+//            requestDto.setBusinessDays(businessDays);
+//            requestDto.setRequestStatus(StatusEnum.PENDING.name());
+//            requestDto.setDateCreated(LocalDate.now());
+//            requestDto.setUser(getLoggedInUser());
+            RequestEntity requestEntity = requestConverter.toEntity(newRequestDto);
+            requestEntity.setBusinessDays(businessDays);
+            requestEntity.setRequestStatus(StatusEnum.PENDING.name());
+            requestEntity.setDateCreated(LocalDate.now());
+            requestEntity.setUser(getLoggedInUser());
+            requestEntity.setDeleted(false);
             requestRepository.save(requestEntity);
-            return getRequestDto(requestEntity);
+            return requestConverter.toNewRequestDto(requestEntity);
         }
     }
 
@@ -142,16 +151,16 @@ public class RequestService {
             throw new AccessDeniedException("Access denied");
         }
         RequestEntity requestEntity = requestConverter.toEntity(requestDto);
-        requestDto.setUser(getLoggedInUser());
+        requestDto.setUser(userConverter.toMinimalUserDto(getLoggedInUser()));
         requestRepository.save(requestEntity);
         return requestDto;
     }
 
 
 
-    private MinimalUserDto getLoggedInUser(){
+    private UserEntity getLoggedInUser(){
         String email = Utils.getCurrentEmail().orElse(null);
-        return userConverter.toMinimalUserDto(userRepository.getById(userRepository.findByEmail(email).getId()));
+        return (userRepository.getById(userRepository.findByEmail(email).getId()));
 
     }
     public RequestDto rejectRequest(Long id) throws RequestAlreadyProcessed {

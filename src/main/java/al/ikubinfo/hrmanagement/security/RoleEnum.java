@@ -13,5 +13,9 @@ public enum RoleEnum {
     RoleEnum(String role) {
         this.roleName = role;
     }
+
+    public String getRoleName() {
+        return roleName;
+    }
 }
 

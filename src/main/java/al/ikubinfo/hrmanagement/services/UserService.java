@@ -48,11 +48,16 @@ public class UserService {
     private TokenProvider tokenProvider;
 
 
-    public List<UserEntity>getUsers(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+    public List<UserEntity>getUsers(Integer pageNo, Integer pageSize, String sortBy, Long roleId) {
 
-        return userRepository
-                .findAll(paging)
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<UserEntity> page = roleId != null ?
+                userRepository.findAllByRoleId(roleId, pageable) :
+                userRepository.findAll(pageable);
+
+        return page
                 .stream()
                 .collect(Collectors.toList());
     }

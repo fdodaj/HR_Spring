@@ -47,8 +47,6 @@ jwt:
   token-validity-in-seconds: 1800
 
 server:
-  error:
-    include-stacktrace: never
   port: 8080
 
 logging:

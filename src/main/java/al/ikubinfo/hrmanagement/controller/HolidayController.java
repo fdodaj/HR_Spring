@@ -1,9 +1,11 @@
 package al.ikubinfo.hrmanagement.controller;
 
 import al.ikubinfo.hrmanagement.dto.HolidayDto;
+import al.ikubinfo.hrmanagement.security.RoleEnum;
 import al.ikubinfo.hrmanagement.services.HolidayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class HolidayController {
     private HolidayService holidayService;
 
 
+//    @PreAuthorize("hasRole(RoleEnum.ADMIN.getRoleName())")
     @GetMapping()
     public ResponseEntity<List<HolidayDto>> getHoliday(
             @RequestParam(defaultValue = "0") Integer pageNo,

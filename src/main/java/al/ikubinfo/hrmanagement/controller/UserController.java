@@ -28,8 +28,9 @@ public class UserController {
     public ResponseEntity<List<UserEntity>> getUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false) Long roleId,
             @RequestParam(defaultValue = "id") String sortBy){
-            return new ResponseEntity<>(userService.getUsers(pageNo, pageSize, sortBy),
+            return new ResponseEntity<>(userService.getUsers(pageNo, pageSize, sortBy, roleId),
                                        HttpStatus.OK);
     }
 
