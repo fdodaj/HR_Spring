@@ -21,9 +21,6 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-
-
     @Autowired
     private TokenProvider tokenProvider;
 
@@ -76,12 +73,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/holidays/**").hasAuthority(RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.GET,"/users/{^[\\d]$}").hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.HR.name(), RoleEnum.PD.name(), RoleEnum.EMPLOYEE.name())
-                .antMatchers(HttpMethod.GET,"/all/less-than-ten").hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.HR.name(), RoleEnum.PD.name(), RoleEnum.EMPLOYEE.name())
-                .antMatchers(HttpMethod.GET, "/users/all").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.PD.name())
-                .antMatchers(HttpMethod.POST, "/users/add").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, "/users/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, "/users/all/my-department").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.ADMIN.name())
 
                 .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.HR.name(), RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(),RoleEnum.ADMIN.name())

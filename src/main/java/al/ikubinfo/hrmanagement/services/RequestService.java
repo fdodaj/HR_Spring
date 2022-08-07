@@ -25,6 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,7 @@ public class RequestService {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('HR') or hasRole('PD')")
     public List<RequestEntity> getRequests(Integer pageNo, Integer pageSize, String sortBy,String requestStatus ) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
