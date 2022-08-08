@@ -74,18 +74,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/holidays/**").hasAuthority(RoleEnum.ADMIN.name())
 
-                .antMatchers(HttpMethod.GET, "/requests/all").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.HR.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/requests/add").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(),RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.PD.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, "/requests/{^[\\d]$}").hasAnyAuthority(RoleEnum.EMPLOYEE.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, "/requests/{^[\\d]$}/accept", "/requests/{^[\\d]$}/reject").hasAnyAuthority(RoleEnum.HR.name(), RoleEnum.ADMIN.name())
-//
+
 
                 .antMatchers(HttpMethod.POST, "/department/add").hasAuthority(RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
                 .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
 
 
                 .anyRequest().authenticated().and().apply(securityConfigurerAdapter());

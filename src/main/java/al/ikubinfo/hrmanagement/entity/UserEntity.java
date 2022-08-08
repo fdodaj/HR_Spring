@@ -54,9 +54,6 @@ public class UserEntity {
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
-    @Column(name = "leader")
-    private boolean departmentLeader;
-
     @ManyToOne
     @JoinColumn(name = "user_role")
     @JsonIgnore

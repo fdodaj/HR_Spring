@@ -49,24 +49,25 @@ public class UserService {
     @Autowired
     private UserConverter userConverter;
 
+
     @Autowired
     private TokenProvider tokenProvider;
 
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
-    public NewUserDto addUser(NewUserDto userDto) {
+    public NewUserDto updateUser(NewUserDto userDto, Long id) {
         UserEntity userEntity = userConverter.toMinimalEntity(userDto);
-        if (userDto.getRole() == 3) {
-            userEntity.setDepartmentLeader(true);
-        } else {
-            userEntity.setDepartmentLeader(false);
-        }
-
+        userEntity.setId(id);
         userRepository.save(userEntity);
         return userDto;
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
+    public NewUserDto addUser(NewUserDto userDto) {
+        UserEntity userEntity = userConverter.toMinimalEntity(userDto);
+        userRepository.save(userEntity);
+        return userDto;
+    }
+
+
     public List<UserDto>getUsers(Integer pageNo, Integer pageSize, String sortBy, Long roleId ) {
 
 
@@ -82,32 +83,31 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('PD')")
-    public List<UserDto>getUsersByDepartment(Long departmentId, Integer pageNo, Integer pageSize, String sortBy ) {
-        UserEntity user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+    public List<UserDto>getUsersByDepartmentId(Long departmentId, Integer pageNo, Integer pageSize, String sortBy ) {
+            Long userId = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null)).getId();
 
-        if (!user.isDepartmentLeader()){
-            throw new AccessNotGranted("You are not a department leader");
-        }
-       else {
-            Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-            Page<UserEntity> page = userRepository.findAllByDepartmentId(departmentId, pageable);
+            if (isAdmin(userId) || Objects.equals(userId, departmentId)){
+                Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+                Page<UserEntity> page = userRepository.getAllByDepartmentId(departmentId, pageable);
 
-            return page
-                    .stream()
-                    .map(userConverter::toDto)
-                    .collect(Collectors.toList());
-        }
+                return page
+                        .stream()
+                        .map(userConverter::toDto)
+                        .collect(Collectors.toList());
+            }
+
+
+            else {
+                throw new AccessNotGranted("Access not granted");
+            }
     }
 
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
     public List<UserEntity> getAllUsersWithTenPtoOrLower() {
         TypedQuery<UserEntity> query = entityManager.createNamedQuery("User.findAllWithLowerPtoThanTen", UserEntity.class);
         return query.getResultList();
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
     public boolean deleteUser(Long id) {
         UserEntity userEntity = userRepository.getById(id);
         userEntity.setDeleted(true);
@@ -115,7 +115,6 @@ public class UserService {
         return true;
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')or hasRole('EMPLOYEE')or hasRole('PD')")
     public UserDto getUserById(Long id) {
         Long userId = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null)).getId();
         if (isLoggedInUser(id) || isAdmin(userId)){
@@ -126,13 +125,11 @@ public class UserService {
         }
     }
 
-
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
-    public UserDto updateUser(UserDto userDto) {
-        UserEntity userEntity = userConverter.toEntity(userDto);
-        userRepository.save(userEntity);
-        return userDto;
+    public UserDto getPersonalInfo() {
+        Long userId = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null)).getId();
+        return userConverter.toDto(userRepository.findById(userId).orElseThrow(null));
     }
+
 
     private boolean isLoggedInUser(Long id) {
         UserEntity user = userRepository.findByEmail(Utils.getCurrentEmail().orElseThrow(null));

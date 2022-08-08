@@ -12,8 +12,9 @@ import java.util.List;
 
 @Repository
 public interface RequestRepository extends JpaRepository<RequestEntity, Long>, PagingAndSortingRepository<RequestEntity, Long> {
-    List<RequestEntity> findAllByUserId(Long id);
-    List<RequestEntity> findByUserIdAndRequestStatusIn(Long id, List<String> statuses);
 
+    List<RequestEntity> findByUserIdAndRequestStatusIn(Long id, List<String> statuses);
     Page<RequestEntity> findAllByRequestStatus(String requestStatus, Pageable pageable);
+
+    RequestEntity getByUserIdAndId(Long userId, Long id);
 }

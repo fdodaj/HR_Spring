@@ -8,9 +8,11 @@ import al.ikubinfo.hrmanagement.exception.AccessNotGranted;
 import al.ikubinfo.hrmanagement.repository.DepartmentRepository;
 import al.ikubinfo.hrmanagement.repository.UserRepository;
 import al.ikubinfo.hrmanagement.services.DepartmentService;
+import al.ikubinfo.hrmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +27,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @Autowired
-    private UserRepository userRepository;
-
+    private UserService userService;
 
     @GetMapping()
     public ResponseEntity<List<DepartmentDto>> getDepartments(
@@ -35,6 +36,17 @@ public class DepartmentController {
             @RequestParam(defaultValue = "id") String sortBy
     ) {
         return ResponseEntity.ok(departmentService.getDepartment());
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")
+    @GetMapping("department/{id}")
+    public ResponseEntity<List<UserDto>> getUsersByDepartment(
+            @PathVariable("id") Long departmentId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return ResponseEntity.ok(userService.getUsersByDepartmentId(departmentId, pageNo, pageSize, sortBy));
     }
 
 
