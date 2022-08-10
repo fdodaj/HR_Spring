@@ -28,6 +28,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -63,7 +64,7 @@ public class RequestService {
     }
 
 
-    public List<RequestEntity> getRequests(Integer pageNo, Integer pageSize, String sortBy,String requestStatus ) {
+    public List<RequestDto> getRequests(Integer pageNo, Integer pageSize, String sortBy,String requestStatus ) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<RequestEntity> page = requestStatus != null ?
@@ -71,6 +72,7 @@ public class RequestService {
                 requestRepository.findAll(pageable);
 
         return page.stream()
+                .map(requestConverter::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -99,7 +101,7 @@ public class RequestService {
         int businessDays = getBusinessDays(newRequestDto.getFromDate(), newRequestDto.getToDate());
         for (RequestDto request : getRequestsByUser(user.getId())) {
             if (request.getRequestStatus().equals(StatusEnum.PENDING.name())) {
-                throw new ActiveRequestException("Your request is being processed. Please wait");
+                throw new ActiveRequestException("Your have an pending request. Please try again later ");
             } else if (newRequestDto.getFromDate().isAfter(newRequestDto.getToDate())) {
                 throw new InvalidDateException("Please enter an valid request date");
             } else if (newRequestDto.getFromDate().isAfter(newRequestDto.getToDate()) && request.getRequestStatus().equals(StatusEnum.ACCEPTED.name())) {

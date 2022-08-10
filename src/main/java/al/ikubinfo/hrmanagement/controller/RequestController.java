@@ -29,7 +29,7 @@ public class RequestController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")
     @GetMapping()
-    public ResponseEntity<List<RequestEntity>> getRequests(
+    public ResponseEntity<List<RequestDto>> getRequests(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy,

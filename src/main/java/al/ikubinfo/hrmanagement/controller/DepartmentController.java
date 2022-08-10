@@ -29,6 +29,13 @@ public class DepartmentController {
     @Autowired
     private UserService userService;
 
+
+    @PreAuthorize("hasAnyAuthority('ADMIN','PD')")
+    @GetMapping("/{id}")
+    public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(departmentService.getDepartmentById(id), HttpStatus.OK);
+    }
+    @PreAuthorize("hasAnyAuthority('ADMIN','PD')")
     @GetMapping()
     public ResponseEntity<List<DepartmentDto>> getDepartments(
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -37,6 +44,7 @@ public class DepartmentController {
     ) {
         return ResponseEntity.ok(departmentService.getDepartment());
     }
+
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")
     @GetMapping("department/{id}")
@@ -50,19 +58,20 @@ public class DepartmentController {
     }
 
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping()
     public ResponseEntity<DepartmentDto> addDepartment(@RequestBody DepartmentDto departmentDto) {
         return ResponseEntity.ok(departmentService.addDepartment(departmentDto));
     }
 
-
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @DeleteMapping(path = "{id}")
     public ResponseEntity<DepartmentDto> deleteDepartment(@PathVariable("id") Long id) {
         departmentService.deleteDepartment(id);
         return ResponseEntity.noContent().build();
     }
 
-
+    @PreAuthorize("hasAnyAuthority('ADMIN','PD')")
     @PutMapping(path = "{id}")
     public ResponseEntity<DepartmentDto> updateDepartment(@RequestBody DepartmentDto departmentDto) {
         return ResponseEntity.ok(departmentService.updateDepartment(departmentDto));

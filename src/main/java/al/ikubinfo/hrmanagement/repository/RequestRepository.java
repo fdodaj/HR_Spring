@@ -1,5 +1,6 @@
 package al.ikubinfo.hrmanagement.repository;
 
+import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
 import al.ikubinfo.hrmanagement.entity.RequestEntity;
 import al.ikubinfo.hrmanagement.entity.UserEntity;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,5 @@ public interface RequestRepository extends JpaRepository<RequestEntity, Long>, P
 
     List<RequestEntity> findByUserIdAndRequestStatusIn(Long id, List<String> statuses);
     Page<RequestEntity> findAllByRequestStatus(String requestStatus, Pageable pageable);
-
     RequestEntity getByUserIdAndId(Long userId, Long id);
 }

@@ -18,24 +18,14 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/users")
+@RequestMapping(path = "users")
 public class UserController {
 
 
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")
-    @GetMapping("department/{id}")
-    public ResponseEntity<List<UserDto>> getUsersByDepartment(
-            @PathVariable("id") Long departmentId,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "id") String sortBy
-    ) {
-        return ResponseEntity.ok(userService.getUsersByDepartmentId(departmentId, pageNo, pageSize, sortBy));
-    }
-
+    
     @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")
     @GetMapping()
     public ResponseEntity<List<UserDto>> getUsers(
@@ -52,8 +42,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsersWithTenPtoOrLower(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('HR')")
-    @PostMapping()
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'HR')")    @PostMapping()
     public ResponseEntity<NewUserDto> addUser(@RequestBody NewUserDto userDto) {
         return ResponseEntity.ok(userService.addUser(userDto));
     }

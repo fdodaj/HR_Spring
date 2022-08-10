@@ -73,16 +73,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/holidays/**").hasAuthority(RoleEnum.ADMIN.name())
-
-
-
-                .antMatchers(HttpMethod.POST, "/department/add").hasAuthority(RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAnyAuthority(RoleEnum.PD.name(), RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/department/{^[\\d]$}").hasAuthority(RoleEnum.ADMIN.name())
-
-
                 .anyRequest().authenticated().and().apply(securityConfigurerAdapter());
     }
 

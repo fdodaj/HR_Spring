@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 public class TestSupport {
-    protected static final String PASSWORD = "password";
     protected static final String BEARER = "Bearer ";
     protected static final String AUTHORIZATION = "Authorization";
 

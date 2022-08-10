@@ -1,8 +1,10 @@
 package al.ikubinfo.hrmanagement;
 import al.ikubinfo.hrmanagement.converters.RoleConverter;
 import al.ikubinfo.hrmanagement.converters.UserConverter;
+import al.ikubinfo.hrmanagement.dto.requestdtos.NewRequestDto;
 import al.ikubinfo.hrmanagement.dto.requestdtos.RequestDto;
 import al.ikubinfo.hrmanagement.dto.userdtos.LoginDto;
+import al.ikubinfo.hrmanagement.dto.userdtos.NewUserDto;
 import al.ikubinfo.hrmanagement.dto.userdtos.UserDto;
 import al.ikubinfo.hrmanagement.repository.RoleRepository;
 import al.ikubinfo.hrmanagement.services.DepartmentService;
@@ -26,28 +28,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class controllerTest extends TestSupport {
 
     private static final String URL_LOGIN = "/login";
-    private static final String URL_REQUEST = "/requests/add";
-    private static final  String URL_USER = "/users/add";
-    private static final String URL_APPROVE_REQUEST = "/requests/{^[\\d]$}/accept";
+    private static final String URL_REQUEST = "/requests";
+    private static final  String URL_USER = "/users";
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserConverter userConverter;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-
-    @Autowired
-    private RoleConverter roleConverter;
-
-    @Autowired
-    private DepartmentService departmentService;
 
 
     @Nested
@@ -108,32 +93,24 @@ public class controllerTest extends TestSupport {
         }
 
 
-        private RequestDto addRequest() {
-            RequestDto requestDto = new RequestDto();
+        private NewRequestDto addRequest() {
+            NewRequestDto requestDto = new NewRequestDto();
             requestDto.setReason("TEST");
             requestDto.setFromDate(LocalDate.now());
-            requestDto.setToDate(LocalDate.now());
-            requestDto.setBusinessDays(111);
-            requestDto.setRequestStatus("TEST");
-            requestDto.setDateCreated(LocalDate.now());
-            requestDto.setDeleted(false);
-            requestDto.setUser(userConverter.toMinimalUserDto(userConverter.toEntity(userService.getUserById(1L))));
+            requestDto.setToDate(LocalDate.now().plusDays(5));
             return requestDto;
         }
 
-        private UserDto addUSer() {
-            UserDto userDto = new UserDto();
+        private NewUserDto addUSer() {
+            NewUserDto userDto = new NewUserDto();
             userDto.setFirstName("TEST");
             userDto.setLastName("TEST");
             userDto.setEmail("TEST");
             userDto.setPassword("TEST");
             userDto.setBirthday(LocalDate.now());
             userDto.setGender("TEST");
-            userDto.setHireDate(LocalDate.now());
-            userDto.setPaidTimeOff(25);
-            userDto.setDeleted(false);
-            userDto.setRole(roleService.getRoleById(1L));
-            userDto.setDepartment(departmentService.getDepartmentById(1L));
+            userDto.setRole(1L);
+            userDto.setDepartment(1L);
             return userDto;
         }
     }
